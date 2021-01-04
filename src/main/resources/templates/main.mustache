@@ -1,0 +1,68 @@
+<html>
+<body>
+
+    <div>
+                   <form method="post">
+                       <input type="text" name="name_pr" placeholder="Название" />
+                       <input type="text" name="tag" placeholder="tag">
+                       <input type="text" name="qr" placeholder="qr">
+                       <input type="text" name="ideal" placeholder="ideal">
+                       <input type="text" name="real" placeholder="real">
+                       <button type="submit">Добавить</button>
+                   </form>
+                </div>
+
+
+         <div>Список сообщений</div>
+             <form method="post" action="filter">
+                  <input type="text" name="filter">
+                  <button type="submit">Найти</button>
+             </form>
+              {{#messages}}
+                 <div>
+                         <b>{{id}}</b>
+                         <span>{{name_pr}}</span>
+                         <i>{{tag}}</i>
+                         <i>{{qr}}</i>
+                         <i>{{ideal}}</i>
+                         <i>{{real}}</i>
+                </div>
+             {{/messages}}
+
+
+            <div>чек по коду</div>
+                 <form method="post" action="check">
+                     <input type="text" name="check">
+                     <button type="submit">Найти</button>
+                  </form>
+
+
+                {{#messages}}
+                   <div>
+                        <b>{{id}}</b>
+                        <span>{{name_pr}}</span>
+                        <i>{{tag}}</i>
+                        <i>{{qr}}</i>
+                         <i>{{ideal}}</i>
+                         <i>{{real}}</i>
+                    </div>
+                {{/messages}}
+
+                 <div>Не найденные</div>
+                    <form method="post" action="filter">
+                        <input type="text" name="filter">
+                        <button type="submit">Найти</button>
+                    </form>
+                    {{#messages}}
+                    <div>
+                      <b>{{id}}</b>
+                                              <span>{{name_pr}}</span>
+                                              <i>{{tag}}</i>
+                                              <i>{{qr}}</i>
+                                               <i>{{ideal}}</i>
+                                               <i>{{real}}</i>
+                    </div>
+                    {{/messages}}
+
+</body>
+</html>
