@@ -3,7 +3,7 @@ package com.example.diplom.domain;
 import javax.persistence.*;
 
 @Entity
-public class Message {
+public class Company {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
@@ -15,7 +15,7 @@ public class Message {
 
     private String company_name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category_id;
 
@@ -37,10 +37,10 @@ public class Message {
     private String investment_process___;
 
 
-    public Message() {
+    public Company() {
     }
 
-    public Message(String name_pr, String tag, String qr,Integer ideal,Integer real) {
+    public Company(String name_pr, String tag, String qr, Integer ideal, Integer real) {
         this.name_pr = name_pr;
         this.tag = tag;
         this.qr = qr;

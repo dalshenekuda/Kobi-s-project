@@ -1,6 +1,6 @@
 package com.example.diplom;
 
-import com.example.diplom.domain.Message;
+import com.example.diplom.domain.Company;
 import com.example.diplom.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ import java.util.Map;
 
         @GetMapping
         public String main(Map<String, Object> model) {
-            Iterable<Message> messages = messageRepo.findAll();
+            Iterable<Company> messages = messageRepo.findAll();
 
             model.put("messages", messages);
 
@@ -40,11 +40,11 @@ import java.util.Map;
         @PostMapping
         public String add(@RequestParam String name_pr, @RequestParam String tag,@RequestParam String qr,
                           @RequestParam Integer ideal, @RequestParam Integer real,  Map<String, Object> model) {
-            Message message = new Message(name_pr, tag, qr,ideal,real);
+            Company company = new Company(name_pr, tag, qr,ideal,real);
 
-            messageRepo.save(message);
+            messageRepo.save(company);
 
-            Iterable<Message> messages = messageRepo.findAll();
+            Iterable<Company> messages = messageRepo.findAll();
 
             model.put("messages", messages);
 
@@ -54,7 +54,7 @@ import java.util.Map;
 
         @PostMapping("filter")
         public String filter(@RequestParam Integer filter, Map<String, Object> model) {
-            Iterable<Message> messages;
+            Iterable<Company> messages;
                 if(filter!=null) {
                     messages = messageRepo.findByReal(filter);
                     model.put("messages", messages);
@@ -72,15 +72,15 @@ import java.util.Map;
 
                 if(bool)
                 {
-                    Message message;
-                    message = messageRepo.findByQr(check);
-                    message.setReal(1);
-                    messageRepo.save(message);
+                    Company company;
+                    company = messageRepo.findByQr(check);
+                    company.setReal(1);
+                    messageRepo.save(company);
                 }
                 else {
 
-                    Message message = new Message("unknown", "unknown", check,1,1);
-                    messageRepo.save(message);
+                    Company company = new Company("unknown", "unknown", check,1,1);
+                    messageRepo.save(company);
                 }
             }
 

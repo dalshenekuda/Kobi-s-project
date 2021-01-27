@@ -9,6 +9,9 @@ public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String name;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
     private Long category_id;
 
 }
