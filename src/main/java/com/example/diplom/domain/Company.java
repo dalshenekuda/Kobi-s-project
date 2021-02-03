@@ -1,12 +1,15 @@
 package com.example.diplom.domain;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Company {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+
     private String name_pr;
     private String tag;
     private String qr;
@@ -15,26 +18,44 @@ public class Company {
 
     private String company_name;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id")
-    private Category category_id;
 
-    private Integer sub_category_id;
-    private String website;
-    private String logo;
-    private String founder_id;
-    private String video;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "category_id")
+//    private Category category;
+
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "sub_category_id")
+//    private SubCategory sub_category;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "founder_id")
+    private Founder founder;
+
+
+    @ManyToMany
+    @JoinTable (name="company_sub_category",
+            joinColumns=@JoinColumn (name="company_id"),
+            inverseJoinColumns=@JoinColumn(name="sub_category_id"))
+    private List<SubCategory> subCategories;
+
+
+
+//
+//    private String website;
+//    private String logo;
+//    private String video;
 
     @Enumerated(EnumType.STRING)
     private StageOfTheCompany stageOfTheCompany;
 
-    private MarketValidation marketValidation;
-
-    private String size_of_sales___;
-    private String status___;
-    private String priority___;
-    private String transfer_to___;
-    private String investment_process___;
+//
+//    private MarketValidation marketValidation;
+//
+//    private String size_of_sales___;
+//    private String status___;
+//    private String priority___;
+//    private String transfer_to___;
+//    private String investment_process___;
 
 
     public Company() {
@@ -47,15 +68,6 @@ public class Company {
         this.ideal = ideal;
         this.real = real;
     }
-
-    public Integer getSub_category_id() {
-        return sub_category_id;
-    }
-
-    public void setSub_category_id(Integer sub_category_id) {
-        this.sub_category_id = sub_category_id;
-    }
-
 
     public String getName_pr() {
         return name_pr;
@@ -93,5 +105,13 @@ public class Company {
     }
     public void setReal(Integer real) {
         this.real = real;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
     }
 }
