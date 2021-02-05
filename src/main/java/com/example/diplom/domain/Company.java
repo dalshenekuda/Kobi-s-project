@@ -1,5 +1,4 @@
 package com.example.diplom.domain;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
@@ -11,11 +10,9 @@ public class Company {
     private Integer id;
     private String company_name;
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "founder_id")
     private Founder founder;
-
 
     @ManyToMany
     @JoinTable (name="company_sub_category",
@@ -44,10 +41,13 @@ public class Company {
     public Company() {
     }
 
-    public Company(String company_name, Integer founder_id) {
+    public Company(String company_name, Founder founder) {
         this.company_name=company_name;
-        this.founder.getFounder_id();
+        this.founder=founder;
+
     }
+
+
 
 
 

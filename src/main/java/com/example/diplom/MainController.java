@@ -3,6 +3,7 @@ package com.example.diplom;
 import com.example.diplom.domain.Company;
 import com.example.diplom.domain.Founder;
 import com.example.diplom.repos.CompanyRepo;
+import com.example.diplom.repos.FounderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,14 +17,17 @@ import java.util.Map;
     public class MainController {
         @Autowired
         private CompanyRepo CompanyRepo;
-        @GetMapping("/greeting")
-        public String greeting(
-                @RequestParam(name="name", required=false, defaultValue="World") String name,
-                Map<String, Object> model
-        ) {
-            model.put("name", name);
-            return "greeting";
-        }
+        @Autowired
+        private FounderRepo FounderRepo;
+
+//        @GetMapping("/greeting")
+//        public String greeting(
+//                @RequestParam(name="name", required=false, defaultValue="World") String name,
+//                Map<String, Object> model
+//        ) {
+//            model.put("name", name);
+//            return "greeting";
+//        }
 
         @GetMapping
         public String main(Map<String, Object> model) {
@@ -33,16 +37,21 @@ import java.util.Map;
         }
 
         @PostMapping("add")
-        public String add(@RequestParam String founder_name,@RequestParam List<Integer> sub_categories_id,@RequestParam String company_name,  Map<String, Object> model)
+        public String add(@RequestParam String founder_name, @RequestParam String company_name,  Map<String, Object> model)
         {
             Founder founder = new Founder(founder_name);
-            CompanyRepo.save(founder);
-           // List<Category> categories = new
+            FounderRepo.save(founder);
 
-            Company company = new Company(company_name,founder.getFounder_id());
+           // List<Category> categories = new
+//            Iterable<Founder> founders = FounderRepo.findAll();
+//            model.put("founder", founders);
+
+
+            Company company = new Company(company_name,founder);
             CompanyRepo.save(company);
-            Iterable<Company> companies = CompanyRepo.findAll();
-            model.put("companies", companies);
+
+//            Iterable<Company> companies = CompanyRepo.findAll();
+//            model.put("company", companies);
 
             return "add";
         }

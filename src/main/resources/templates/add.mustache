@@ -3,17 +3,12 @@
 <body>
     <div>
         <form method="post">
-            <input type="text" name="company_name" placeholder="Введите сообщение" />
+            <input type="text" name="company_name" placeholder="Введите имя конторы" />
+            <input type="text" name="founder_name" placeholder="Введите имя чела" />
             <button type="submit">Добавить</button>
         </form>
     </div>
 
-<div>Список сообщений</div>
-    {{#messages}}
-        <div>
-            <b>{{id}}</b>
-            <span>{{company_name}}</span>
-        </div>
-    {{/messages}}
+
 </body>
 </html>
