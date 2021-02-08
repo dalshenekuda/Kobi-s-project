@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test tak skazat</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<!--<th:block th:include="/_menu"></th:block>-->
+
+<h2>Adding company</h2>
+<!--<div align="center">-->
+<form th:action="@{/add}" th:object="${stageOfTheCompanies}" method="POST">
+<input type="text" name="company_name" placeholder="Name of company"/>
+<input type="text" name="founder_name" placeholder="Name of founder"/>
+
+    <select name="_stageOfCompany">
+        <option th:each="stage :${stageOfTheCompanies}"
+                th:text="${stage}">
+    </select>
+
+
+<input type="submit" value="Save" />
+</form>
+
+
+
+</body>
+
+</html>

@@ -2,6 +2,7 @@ package com.example.diplom.domain;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import  com.example.diplom.domain.StageOfTheCompany;
 
 @Entity
 public class Company {
@@ -25,8 +26,8 @@ public class Company {
 //    private String logo;
 //    private String video;
 
-//    @Enumerated(EnumType.STRING)
-//    private StageOfTheCompany stageOfTheCompany;
+    @Enumerated(EnumType.STRING)
+    private StageOfTheCompany stageOfTheCompany;
 
 //
 //    private MarketValidation marketValidation;
@@ -41,19 +42,13 @@ public class Company {
     public Company() {
     }
 
-    public Company(String company_name, Founder founder) {
+    public Company(String company_name, Founder founder,StageOfTheCompany stageOfTheCompany) {
         this.company_name=company_name;
         this.founder=founder;
+        this.stageOfTheCompany=stageOfTheCompany;
 
     }
 
-
-
-
-
-//    public void setReal(Integer real) {
-//        this.real = real;
-//    }
 
     public String getCompany_name() {
         return company_name;
@@ -73,5 +68,13 @@ public class Company {
 
     public void setFounder(Founder founder) {
         this.founder = founder;
+    }
+
+    public StageOfTheCompany getStageOfTheCompany() {
+        return stageOfTheCompany;
+    }
+
+    public void setStageOfTheCompany(StageOfTheCompany stageOfTheCompany) {
+        this.stageOfTheCompany = stageOfTheCompany;
     }
 }
