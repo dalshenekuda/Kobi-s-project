@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test tak skazat</title>
+</head>
+<body>
+
+<h2>Adding category/sub</h2>
+
+<form th:action="@{/addCategory}" th:object="${categories}" method="POST">
+
+    <input type="text" name="category_name" placeholder="Name of new category"/>
+
+
+    <table>
+
+            <th> Categories: </th>
+        <th> </th>
+
+        <tbody>
+        <tr th:each="category : ${categories}">
+
+            <td><span th:text="${category.category_id}"></span></td>
+            <td><span th:text="${category.name}"> </span></td>
+        </tr>
+        </tbody>
+    </table>
+
+<!--    <tr th:if="${categories.empty}">-->
+<!--        <td colspan="2"> No Category Available </td>-->
+<!--    </tr>-->
+<!--    <tr th:each="book : ${books}">-->
+<!--        <td><span th:text="${book.title}"> Title </span></td>-->
+<!--        <td><span th:text="${book.author}"> Author </span></td>-->
+<!--    </tr>-->
+
+
+
+
+<!--    <input type="text" name="founder_name" placeholder="Name of founder"/>-->
+
+<!--    <select name="_stageOfCompany">-->
+<!--        <option th:each="stage :${stageOfTheCompanies}"-->
+<!--                th:text="${stage}">-->
+<!--    </select>-->
+
+
+    <input type="submit" value="Save" />
+</form>
+</body>
+</html>

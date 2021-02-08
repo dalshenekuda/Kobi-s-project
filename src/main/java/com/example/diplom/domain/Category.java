@@ -1,6 +1,7 @@
 package com.example.diplom.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,11 +13,12 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy="category",fetch = FetchType.EAGER)
-    private List<SubCategory> subCategories;
+    private List<SubCategory> subCategories = new ArrayList<>();
 
     public Category(){}
 
     public Category(String name){
+        this.name=name;
 
     }
 

@@ -1,10 +1,13 @@
 package com.example.diplom;
 
+import com.example.diplom.domain.Category;
 import com.example.diplom.domain.Company;
 import com.example.diplom.domain.Founder;
 import com.example.diplom.domain.StageOfTheCompany;
+import com.example.diplom.repos.CategoryRepo;
 import com.example.diplom.repos.CompanyRepo;
 import com.example.diplom.repos.FounderRepo;
+import com.example.diplom.repos.SubCategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,16 +26,10 @@ import java.util.Map;
         private CompanyRepo CompanyRepo;
         @Autowired
         private FounderRepo FounderRepo;
-
-        @GetMapping("/greeting")
-        public String greeting(
-                @RequestParam(name="name", required=false, defaultValue="World") String name,
-                Model model
-        ) {
-            model.addAttribute("name", name);
-            return "greeting";
-        }
-
+        @Autowired
+        private CategoryRepo CategoryRepo;
+        @Autowired
+        private SubCategoryRepo SubCategoryRepo;
 
         @GetMapping
         public String test1(Model model) {
@@ -44,6 +41,25 @@ import java.util.Map;
            model.addAttribute("stageOfTheCompanies", stageOfTheCompanies);
             return "test1";
         }
+        @GetMapping("/addCategory")
+        public String addCategory(Model model) {
+            Iterable<Category> categories =CategoryRepo.findAll();
+            model.addAttribute("categories",categories);
+            return "addCategory";
+        }
+
+        @PostMapping("/addCategory")
+        public String addCategory(@RequestParam String category_name, Model model) {
+            Iterable<Category> categories =CategoryRepo.findAll();
+            model.addAttribute("categories",categories);
+
+            Category category = new Category(category_name);
+            CategoryRepo.save(category);
+            return "addCategory";
+        }
+
+
+
 
 
 //        @GetMapping
@@ -53,7 +69,7 @@ import java.util.Map;
 //            return "add";
 //        }
 
-        @PostMapping("add")
+        @PostMapping
         public String add(@RequestParam String founder_name, @RequestParam String company_name,@RequestParam String _stageOfCompany,  Model model)
         {
             StageOfTheCompany[] stageOfTheCompanies = StageOfTheCompany.values();
@@ -65,9 +81,6 @@ import java.util.Map;
 
             Company company = new Company(company_name,founder,stageOfTheCompany);
             CompanyRepo.save(company);
-
-//            Iterable<Company> companies = CompanyRepo.findAll();
-//            model.put("companies", companies);
 
             return "test1";
         }

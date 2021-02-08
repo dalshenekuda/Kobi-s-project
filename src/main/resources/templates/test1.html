@@ -4,12 +4,15 @@
     <title>Test tak skazat</title>
 </head>
 <body>
+
+<a href="http://localhost:8080/addCategory">Adding category</a>
 <!-- Include _menu.html -->
 <!--<th:block th:include="/_menu"></th:block>-->
 
 <h2>Adding company</h2>
 <!--<div align="center">-->
-<form th:action="@{/add}" th:object="${stageOfTheCompanies}" method="POST">
+<form th:action="@{/}" th:object="${stageOfTheCompanies}" method="POST">
+<!--    акшен может ошибку выкинуть-->
 <input type="text" name="company_name" placeholder="Name of company"/>
 <input type="text" name="founder_name" placeholder="Name of founder"/>
 
@@ -21,9 +24,5 @@
 
 <input type="submit" value="Save" />
 </form>
-
-
-
 </body>
-
 </html>
