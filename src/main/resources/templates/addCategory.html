@@ -6,7 +6,8 @@
 <body>
 
 <h2>Adding category/sub</h2>
-
+<a href="http://localhost:8080/sub">Adding sub category</a>
+<br> <br>
 <form th:action="@{/addCategory}" th:object="${categories}" method="POST">
 
     <input type="text" name="category_name" placeholder="Name of new category"/>
@@ -19,12 +20,13 @@
 
         <tbody>
         <tr th:each="category : ${categories}">
-
             <td><span th:text="${category.category_id}"></span></td>
             <td><span th:text="${category.name}"> </span></td>
         </tr>
         </tbody>
     </table>
+
+
 
 <!--    <tr th:if="${categories.empty}">-->
 <!--        <td colspan="2"> No Category Available </td>-->

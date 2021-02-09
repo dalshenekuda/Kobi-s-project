@@ -8,6 +8,6 @@ import java.util.List;
 public interface CompanyRepo extends CrudRepository<Company, Long> {
 //    List<Company> findByReal(Integer real);
 //    Company findByQr(String qr);
-//    boolean existsByQr(String qr);
+   //   boolean existsByQr(String qr);
 
 }

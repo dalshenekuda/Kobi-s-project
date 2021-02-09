@@ -1,9 +1,6 @@
 package com.example.diplom;
 
-import com.example.diplom.domain.Category;
-import com.example.diplom.domain.Company;
-import com.example.diplom.domain.Founder;
-import com.example.diplom.domain.StageOfTheCompany;
+import com.example.diplom.domain.*;
 import com.example.diplom.repos.CategoryRepo;
 import com.example.diplom.repos.CompanyRepo;
 import com.example.diplom.repos.FounderRepo;
@@ -50,14 +47,41 @@ import java.util.Map;
 
         @PostMapping("/addCategory")
         public String addCategory(@RequestParam String category_name, Model model) {
-            Iterable<Category> categories =CategoryRepo.findAll();
-            model.addAttribute("categories",categories);
+
 
             Category category = new Category(category_name);
             CategoryRepo.save(category);
+            Iterable<Category> categories =CategoryRepo.findAll();
+            model.addAttribute("categories",categories);
             return "addCategory";
         }
 
+        @GetMapping("/sub")
+        public String addSub(Model model) {
+            Iterable<Category> categories =CategoryRepo.findAll();
+            model.addAttribute("categories",categories);
+
+            Iterable<SubCategory> subCategories = SubCategoryRepo.findAll();
+            model.addAttribute("subCategories",subCategories);
+            return "sub";
+        }
+
+        @PostMapping("/sub")
+        public String addSub(@RequestParam String sub_category_name,String category_name, Model model) {
+
+            Category category = CategoryRepo.findByName(category_name);
+
+            SubCategory subCategory = new SubCategory(sub_category_name,category);
+            SubCategoryRepo.save(subCategory);
+
+            Iterable<SubCategory> subCategories = SubCategoryRepo.findAll();
+            model.addAttribute("subCategories",subCategories);
+
+            Iterable<Category> categories =CategoryRepo.findAll();
+            model.addAttribute("categories",categories);
+
+            return "sub";
+        }
 
 
 

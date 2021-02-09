@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test tak skazat</title>
+</head>
+<body>
+
+<h2>Adding category/sub</h2>
+<th> </th>
+<style>
+    ul.el > li {
+        display: inline;	/* Располагаем элементы по горизонтали */
+        list-style: none;	/* Убираем маркеры списка */
+    }
+</style>
+<a style="margin-: 32px" href="http://localhost:8080/addCategory">Adding category</a>
+<br> <br>
+<form th:action="@{/sub}"  method="POST">
+<!--    <form th:action="@{/addSub}" th:object="${categories}" method="POST">-->
+
+
+
+    <ul class="el">
+        <li><input type="text" name="sub_category_name" placeholder="Sub category'name"/></li>
+        <li>
+        <select name="category_name">
+            <option th:each="category :${categories}"
+                    th:text="${category.name}">
+        </select>
+        </li>
+    </ul>
+    
+    <table>
+
+        <th> Sub categories: </th>
+        <th> </th>
+
+        <tbody>
+        <tr th:each="subCategory : ${subCategories}">
+            <td><span th:text="${subCategory.sub_category_id}"></span></td>
+            <td><span th:text="${subCategory.name}"> </span></td>
+        </tr>
+        </tbody>
+    </table>
+    <br> <br>
+    <input type="submit" value="Save" />
+</form>
+</body>
+</html>
