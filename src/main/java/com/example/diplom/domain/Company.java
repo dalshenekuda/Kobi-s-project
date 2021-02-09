@@ -1,8 +1,6 @@
 package com.example.diplom.domain;
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
-import  com.example.diplom.domain.StageOfTheCompany;
 
 @Entity
 public class Company {
@@ -42,10 +40,11 @@ public class Company {
     public Company() {
     }
 
-    public Company(String company_name, Founder founder,StageOfTheCompany stageOfTheCompany) {
+    public Company(String company_name, Founder founder, StageOfTheCompany stageOfTheCompany,List<SubCategory> subCategories) {
         this.company_name=company_name;
         this.founder=founder;
         this.stageOfTheCompany=stageOfTheCompany;
+        this.subCategories = subCategories;
 
     }
 
@@ -76,5 +75,13 @@ public class Company {
 
     public void setStageOfTheCompany(StageOfTheCompany stageOfTheCompany) {
         this.stageOfTheCompany = stageOfTheCompany;
+    }
+
+    public List<SubCategory> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(List<SubCategory> subCategories) {
+        this.subCategories = subCategories;
     }
 }

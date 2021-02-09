@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-    @Controller
+@Controller
     public class MainController {
         @Autowired
         private CompanyRepo CompanyRepo;
@@ -30,13 +29,14 @@ import java.util.Map;
 
         @GetMapping
         public String test1(Model model) {
-           StageOfTheCompany[] stageOfTheCompanies = StageOfTheCompany.values();
+            Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
+            model.addAttribute("subCategoriesList", subCategoriesList);
 
-          //  List<String> stageOfTheCompanies= new ArrayList<>();
+            StageOfTheCompany[] stageOfTheCompanies = StageOfTheCompany.values();
+            model.addAttribute("stageOfTheCompanies", stageOfTheCompanies);
+           // Iterable<Company> companies = CompanyRepo.findAll();
 
-            Iterable<Company> companies = CompanyRepo.findAll();
-           model.addAttribute("stageOfTheCompanies", stageOfTheCompanies);
-            return "test1";
+            return "Main";
         }
         @GetMapping("/addCategory")
         public String addCategory(Model model) {
@@ -74,17 +74,14 @@ import java.util.Map;
             SubCategory subCategory = new SubCategory(sub_category_name,category);
             SubCategoryRepo.save(subCategory);
 
-            Iterable<SubCategory> subCategories = SubCategoryRepo.findAll();
-            model.addAttribute("subCategories",subCategories);
+            Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
+            model.addAttribute("subCategoriesList",subCategoriesList);
 
             Iterable<Category> categories =CategoryRepo.findAll();
             model.addAttribute("categories",categories);
 
             return "sub";
         }
-
-
-
 
 //        @GetMapping
 //        public String main(Map<String, Object> model) {
@@ -94,20 +91,52 @@ import java.util.Map;
 //        }
 
         @PostMapping
-        public String add(@RequestParam String founder_name, @RequestParam String company_name,@RequestParam String _stageOfCompany,  Model model)
+        public String add(@RequestParam String founder_name, @RequestParam String company_name,
+                          @RequestParam String _stageOfCompany, @RequestParam String[] subCategories_s,
+                          Model model)
         {
+
+            StageOfTheCompany[] subCategoriesList = StageOfTheCompany.values();
+            model.addAttribute("subCategoriesList", subCategoriesList);
+
             StageOfTheCompany[] stageOfTheCompanies = StageOfTheCompany.values();
             model.addAttribute("stageOfTheCompanies", stageOfTheCompanies);
+
+            List<String> subCategories= new ArrayList<String>(){};
+            List<SubCategory> subCategoriesObj = new ArrayList<SubCategory>();
+            subCategories=Arrays.asList(subCategories_s);///ЛИСТ СТРИНГОВ
+
+            subCategories.forEach(nameS ->subCategoriesObj.add(SubCategoryRepo.findByName(nameS)) );
 
             Founder founder = new Founder(founder_name);
             FounderRepo.save(founder);
             StageOfTheCompany stageOfTheCompany=StageOfTheCompany.valueOf(_stageOfCompany);
 
-            Company company = new Company(company_name,founder,stageOfTheCompany);
+            Company company = new Company(company_name,founder, stageOfTheCompany,subCategoriesObj);
             CompanyRepo.save(company);
 
-            return "test1";
+
+            return "Main";
         }
+
+    @GetMapping("/view")
+    public String view(Model model) {
+        Iterable<Company> companies =CompanyRepo.findAll();
+        model.addAttribute("companies",companies);
+        return "view";
+    }
+
+    @PostMapping("/view")
+    public String view(@RequestParam String category_name, Model model) {
+
+
+        Iterable<Company> companies =CompanyRepo.findAll();
+        model.addAttribute("companies",companies);
+
+        Iterable<Category> categories =CategoryRepo.findAll();
+        model.addAttribute("categories",categories);
+        return "addCategory";
+    }
 //
 //        @PostMapping
 //        public String add(@RequestParam String name_pr, @RequestParam String tag,@RequestParam String qr,

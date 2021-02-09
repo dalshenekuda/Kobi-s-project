@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test tak skazat</title>
+</head>
+<body>
+
+<h2>View company</h2>
+
+<!--<style>-->
+<!--    ul.el > li {-->
+<!--        display: inline;	/* Располагаем элементы по горизонтали */-->
+<!--        list-style: none;	/* Убираем маркеры списка */-->
+<!--    }-->
+<!--</style>-->
+
+<a style="margin-: 32px" href="http://localhost:8080">Main</a>
+<br> <br>
+
+<form th:action="@{/view}"  method="POST">
+
+    <table>
+        <th> Companies: </th>
+        <tbody>
+        <tr th:each="company : ${companies}">
+            <td><span th:text="${company.company_name}"> </span></td>
+            <td><span th:text="${company.getSubCategories()}"> </span></td>
+
+        </tr>
+        </tbody>
+    </table>
+    <br> <br>
+<!--    <input type="submit" value="Save" />-->
+</form>
+</body>
+</html>

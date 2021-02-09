@@ -54,4 +54,8 @@ public class SubCategory {
     public void setCategory(Category category) {
         this.category = category;
     }
+    @Override
+    public String toString() {
+        return  name;
+    }
 }

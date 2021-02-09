@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test tak skazat</title>
+</head>
+<body>
+<a href="http://localhost:8080/addCategory">Adding category</a>
+<br> <br>
+<a href="http://localhost:8080/sub">Adding sub category</a>
+<br> <br>
+<a href="http://localhost:8080/view">_View_</a>
+<br> <br>
+
+<h2>Adding company</h2>
+<!--<div align="center">-->
+<!--<form th:action="@{/}" th:object="${stageOfTheCompanies}" method="POST">-->
+<form th:action="@{/}"  method="POST">
+<!--    акшен может ошибку выкинуть-->
+<input type="text" name="company_name" placeholder="Name of company"/>
+<input type="text" name="founder_name" placeholder="Name of founder"/>
+
+    <select name="_stageOfCompany">
+        <option th:each="stage :${stageOfTheCompanies}"
+                th:text="${stage}">
+    </select>
+
+<!--    <select name="subCategories">-->
+<!--        <option th:each=" sub:${subCategoriesList}"-->
+<!--                th:text="${sub.name}">-->
+<!--    </select>-->
+
+    <select multiple="multiple" name="subCategories_s" >
+<!--        <option th:each="sub : ${subCategoriesList}"-->
+<!--                th:text="${sub.name}"-->
+<!--                th:selected="${sub.} == ${sub.id}"-->
+<!--        ></option>-->
+        <option value="cat1">cat1</option>
+        <option value="cat2">cat2</option>
+
+
+    </select>
+
+
+<input type="submit" value="Save" />
+</form>
+</body>
+</html>
