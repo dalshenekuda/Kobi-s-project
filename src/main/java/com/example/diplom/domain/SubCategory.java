@@ -10,6 +10,7 @@ public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sub_category_id;
+
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -29,15 +29,22 @@ import java.util.List;
 
         @GetMapping
         public String test1(Model model) {
-            Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
+
+            Iterable<Category> CategoriesList = CategoryRepo.findAll();
+            model.addAttribute("CategoriesList", CategoriesList);
+
+            List<SubCategory> subCategoriesList = new ArrayList<>();
+                CategoriesList.forEach(category -> category.getSubCategories().forEach(subCategory->subCategoriesList.add(subCategory)));
+//            Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
             model.addAttribute("subCategoriesList", subCategoriesList);
 
             StageOfTheCompany[] stageOfTheCompanies = StageOfTheCompany.values();
             model.addAttribute("stageOfTheCompanies", stageOfTheCompanies);
            // Iterable<Company> companies = CompanyRepo.findAll();
-
             return "Main";
         }
+
+
         @GetMapping("/addCategory")
         public String addCategory(Model model) {
             Iterable<Category> categories =CategoryRepo.findAll();
@@ -47,8 +54,6 @@ import java.util.List;
 
         @PostMapping("/addCategory")
         public String addCategory(@RequestParam String category_name, Model model) {
-
-
             Category category = new Category(category_name);
             CategoryRepo.save(category);
             Iterable<Category> categories =CategoryRepo.findAll();
@@ -70,15 +75,14 @@ import java.util.List;
         public String addSub(@RequestParam String sub_category_name,String category_name, Model model) {
 
             Category category = CategoryRepo.findByName(category_name);
-
             SubCategory subCategory = new SubCategory(sub_category_name,category);
             SubCategoryRepo.save(subCategory);
 
-            Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
-            model.addAttribute("subCategoriesList",subCategoriesList);
-
             Iterable<Category> categories =CategoryRepo.findAll();
             model.addAttribute("categories",categories);
+
+            Iterable<SubCategory> subCategories = SubCategoryRepo.findAll();
+            model.addAttribute("subCategories",subCategories);
 
             return "sub";
         }
@@ -96,25 +100,31 @@ import java.util.List;
                           Model model)
         {
 
-            StageOfTheCompany[] subCategoriesList = StageOfTheCompany.values();
+           // subCategories_s
+            List<String> subCategories= new ArrayList<String>(){};
+            List<SubCategory> subCategoriesObj = new ArrayList<SubCategory>();
+
+            subCategories=Arrays.asList(subCategories_s);///ЛИСТ СТРИНГОВ
+            System.out.println(subCategories.get(0));
+          //  subCategories.add("macro");
+            subCategories.forEach(nameS ->subCategoriesObj.add(SubCategoryRepo.findByName(nameS)) );
+
+                Founder founder = new Founder(founder_name);
+                FounderRepo.save(founder);
+                StageOfTheCompany stageOfTheCompany=StageOfTheCompany.valueOf(_stageOfCompany);
+
+                Company company = new Company(company_name,founder, stageOfTheCompany,subCategoriesObj);
+                CompanyRepo.save(company);
+
+            Iterable<Category> CategoriesList = CategoryRepo.findAll();
+            model.addAttribute("CategoriesList", CategoriesList);
+
+            List<SubCategory> subCategoriesList = new ArrayList<>();
+            CategoriesList.forEach(category -> category.getSubCategories().forEach(subCategory->subCategoriesList.add(subCategory)));
             model.addAttribute("subCategoriesList", subCategoriesList);
 
             StageOfTheCompany[] stageOfTheCompanies = StageOfTheCompany.values();
             model.addAttribute("stageOfTheCompanies", stageOfTheCompanies);
-
-            List<String> subCategories= new ArrayList<String>(){};
-            List<SubCategory> subCategoriesObj = new ArrayList<SubCategory>();
-            subCategories=Arrays.asList(subCategories_s);///ЛИСТ СТРИНГОВ
-
-            subCategories.forEach(nameS ->subCategoriesObj.add(SubCategoryRepo.findByName(nameS)) );
-
-            Founder founder = new Founder(founder_name);
-            FounderRepo.save(founder);
-            StageOfTheCompany stageOfTheCompany=StageOfTheCompany.valueOf(_stageOfCompany);
-
-            Company company = new Company(company_name,founder, stageOfTheCompany,subCategoriesObj);
-            CompanyRepo.save(company);
-
 
             return "Main";
         }

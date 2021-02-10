@@ -50,4 +50,9 @@ public class Founder {
     public void setCompanies(List<Company> companies) {
         this.companies = companies;
     }
+    @Override
+    public String toString()
+    {
+        return ""+name;
+    }
 }

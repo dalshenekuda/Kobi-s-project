@@ -1,6 +1,8 @@
 package com.example.diplom.domain;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Company {
@@ -18,6 +20,7 @@ public class Company {
             joinColumns=@JoinColumn (name="company_id"),
             inverseJoinColumns=@JoinColumn(name="sub_category_id"))
     private List<SubCategory> subCategories;
+
 
 //
 //    private String website;
@@ -47,7 +50,6 @@ public class Company {
         this.subCategories = subCategories;
 
     }
-
 
     public String getCompany_name() {
         return company_name;
@@ -81,7 +83,26 @@ public class Company {
         return subCategories;
     }
 
+    public List<Category> getCategories() {
+
+        List<Category> categoriesAll = new ArrayList<>();
+        subCategories.forEach(subCategory -> categoriesAll.add(subCategory.getCategory()));
+        List<Category> categories = categoriesAll.stream().distinct().collect(Collectors.toList());
+
+        return categories;
+    }
+
     public void setSubCategories(List<SubCategory> subCategories) {
         this.subCategories = subCategories;
+    }
+
+    public Founder getFounder() {
+        return founder;
+    }
+    @Override
+    public String toString()
+    {
+     return "Company: " + company_name + " |           founder: "+ founder + " |     stage of company: "+
+              stageOfTheCompany ;
     }
 }

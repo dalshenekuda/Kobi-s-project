@@ -24,7 +24,28 @@
         <tbody>
         <tr th:each="company : ${companies}">
             <td><span th:text="${company.company_name}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getFounder().name}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getStageOfTheCompany()}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
             <td><span th:text="${company.getSubCategories()}"> </span></td>
+
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getCategories()}"> </span></td>
+
 
         </tr>
         </tbody>

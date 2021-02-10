@@ -46,4 +46,9 @@ public class Category {
     public void setSubCategories(List<SubCategory> subCategories) {
         this.subCategories = subCategories;
     }
+
+    @Override
+    public String toString() {
+        return  name;
+    }
 }

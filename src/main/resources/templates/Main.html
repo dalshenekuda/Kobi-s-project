@@ -1,8 +1,13 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:vertical-align="http://www.w3.org/1999/xhtml">
 <head>
     <title>Test tak skazat</title>
 </head>
+<style>
+    .category {
+      height: 100px;
+    }
+</style>
 <body>
 <a href="http://localhost:8080/addCategory">Adding category</a>
 <br> <br>
@@ -12,9 +17,8 @@
 <br> <br>
 
 <h2>Adding company</h2>
-<!--<div align="center">-->
 <!--<form th:action="@{/}" th:object="${stageOfTheCompanies}" method="POST">-->
-<form th:action="@{/}"  method="POST">
+<form th:action="@{/}"  method="POST" vertical-align: middle>
 <!--    акшен может ошибку выкинуть-->
 <input type="text" name="company_name" placeholder="Name of company"/>
 <input type="text" name="founder_name" placeholder="Name of founder"/>
@@ -24,22 +28,41 @@
                 th:text="${stage}">
     </select>
 
-<!--    <select name="subCategories">-->
-<!--        <option th:each=" sub:${subCategoriesList}"-->
-<!--                th:text="${sub.name}">-->
-<!--    </select>-->
+    <select multiple="multiple" class="category" >
+        <option th:each="category : ${CategoriesList}"
+                th:text="${category.name}">
 
-    <select multiple="multiple" name="subCategories_s" >
-<!--        <option th:each="sub : ${subCategoriesList}"-->
-<!--                th:text="${sub.name}"-->
-<!--                th:selected="${sub.} == ${sub.id}"-->
-<!--        ></option>-->
-        <option value="cat1">cat1</option>
-        <option value="cat2">cat2</option>
-
-
+        </option>
     </select>
 
+
+    <select multiple="multiple" name="subCategories_s" class="category">
+        <option th:each="sub : ${subCategoriesList}"
+                th:value="${sub.name}"
+                th:text="${sub.name +'  ('+sub.getCategory()+')'}">
+        </option>
+    </select>
+
+<!--            <tr th:each="category : ${CategoriesList}">-->
+<!--                <select multiple="multiple" name="subCategories_s" class="category">-->
+<!--                    <option th:each=" sub: ${category.getSubCategories()}"-->
+<!--                            th:text="${sub.name +'  ('+sub.getCategory()+')'}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--            </tr>-->
+
+
+<!--    <select multiple="multiple" name="subCategories_s" class="category">-->
+<!--        <option th:each="sub : ${subCategoriesList}"-->
+<!--                th:text="${sub.name +'  ('+sub.getCategory()+')'}">-->
+<!--        </option>-->
+<!--    </select>-->
+
+
+    <!--    <select>-->
+    <!--        <option th:each="category :${CategoriesList}"-->
+    <!--                th:text="${category.name}">-->
+    <!--    </select>-->
 
 <input type="submit" value="Save" />
 </form>
