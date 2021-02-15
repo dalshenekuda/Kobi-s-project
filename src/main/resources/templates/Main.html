@@ -1,13 +1,8 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:vertical-align="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Test tak skazat</title>
 </head>
-<style>
-    .category {
-      height: 100px;
-    }
-</style>
 <body>
 <a href="http://localhost:8080/addCategory">Adding category</a>
 <br> <br>
@@ -17,15 +12,48 @@
 <br> <br>
 
 <h2>Adding company</h2>
+<!--<div align="center">-->
 <!--<form th:action="@{/}" th:object="${stageOfTheCompanies}" method="POST">-->
-<form th:action="@{/}"  method="POST" vertical-align: middle>
+<form th:action="@{/}"  method="POST">
 <!--    акшен может ошибку выкинуть-->
 <input type="text" name="company_name" placeholder="Name of company"/>
 <input type="text" name="founder_name" placeholder="Name of founder"/>
 
+
+
     <select name="_stageOfCompany">
         <option th:each="stage :${stageOfTheCompanies}"
                 th:text="${stage}">
+    </select>
+
+    <select name="_sizeOfTheSales">
+        <option th:each="size :${sizeOfTheSales1}"
+                th:text="${size}">
+    </select>
+
+    <select name="_marketValidation">
+        <option th:each="market :${marketValidations}"
+                th:text="${market}">
+    </select>
+
+    <select name="_investmentProcess">
+        <option th:each="investment :${investmentProcesses}"
+                th:text="${investment}">
+    </select>
+
+    <select name="_priorityCompany">
+        <option th:each="priority :${priorityCompanies}"
+                th:text="${priority}">
+    </select>
+
+    <select name="_statusCompany">
+        <option th:each="status :${statusCompanies}"
+                th:text="${status}">
+    </select>
+
+    <select name="_transferCompany">
+        <option th:each="transfer :${transferCompanies}"
+                th:text="${transfer}">
     </select>
 
     <select multiple="multiple" class="category" >
@@ -35,36 +63,33 @@
         </option>
     </select>
 
-
     <select multiple="multiple" name="subCategories_s" class="category">
         <option th:each="sub : ${subCategoriesList}"
                 th:value="${sub.name}"
                 th:text="${sub.name +'  ('+sub.getCategory()+')'}">
-        </option>
+            <!--</option>
+            <option value="cat1">cat1</option>
+            <option value="cat2">cat2</option>-->
     </select>
 
-<!--            <tr th:each="category : ${CategoriesList}">-->
-<!--                <select multiple="multiple" name="subCategories_s" class="category">-->
-<!--                    <option th:each=" sub: ${category.getSubCategories()}"-->
-<!--                            th:text="${sub.name +'  ('+sub.getCategory()+')'}">-->
-<!--                    </option>-->
-<!--                </select>-->
-<!--            </tr>-->
-
-
-<!--    <select multiple="multiple" name="subCategories_s" class="category">-->
-<!--        <option th:each="sub : ${subCategoriesList}"-->
-<!--                th:text="${sub.name +'  ('+sub.getCategory()+')'}">-->
-<!--        </option>-->
+<!--    <select name="subCategories">-->
+<!--        <option th:each=" sub:${subCategoriesList}"-->
+<!--                th:text="${sub.name}">-->
 <!--    </select>-->
+    <br> <br>
+    <br> <br>
+
+          <input type="text" name="founder_family_name" placeholder="Family name"/>
+          <input type="text" name="founder_email" placeholder="Email"/>
+          <input type="text" name="founder_mobile" placeholder="Mobile"/>
+          <input type="text" name="founder_linkedin" placeholder="Linkedin"/>
+          <input type="text" name="founder_country" placeholder="Country"/>
+          <input type="text" name="website" placeholder="Website"/>
+<!--          <input type="text" name="logo" placeholder="Logo"/>-->
+          <input type="text" name="video" placeholder="Video"/>
 
 
-    <!--    <select>-->
-    <!--        <option th:each="category :${CategoriesList}"-->
-    <!--                th:text="${category.name}">-->
-    <!--    </select>-->
-
-<input type="submit" value="Save" />
-</form>
-</body>
-</html>
+  <input type="submit" value="Save" />
+  </form>
+  </body>
+  </html>

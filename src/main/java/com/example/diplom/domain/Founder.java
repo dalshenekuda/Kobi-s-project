@@ -13,26 +13,70 @@ public class Founder {
     private List<Company> companies;
 
     private String name;
-//    private String family_name;
-//    private String email;
-//    private String mobile;
-//    private String linkedin;
-//    private String country;
+    private String family_name;
+    private String email;
+    private String mobile;
+    private String linkedin;
+    private String country;
 
     public Founder(){
     }
 
-    public Founder(String name){
+    public Founder(String name, String family_name, String email, String mobile, String linkedin, String country){
         this.name=name;
+        this.family_name = family_name;
+        this.email = email;
+        this.mobile = mobile;
+        this.linkedin = linkedin;
+        this.country = country;
     }
-
 
     public String getName() {
         return name;
     }
 
+    public String getFamily_name() {
+        return family_name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public String getLinkedin() {
+        return linkedin;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setFamily_name(String family_name) {
+        this.family_name = family_name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public void setLinkedin(String linkedin) {
+        this.linkedin = linkedin;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public Integer getFounder_id() {

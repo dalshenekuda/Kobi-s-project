@@ -1,4 +1,7 @@
 package com.example.diplom.domain;
+
+import com.example.diplom.domain.enums.*;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +12,14 @@ public class Company {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+
     private String company_name;
+    private String website;
+ //   private String logo;
+    private String video;
+
+
+    private String vide;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "founder_id")
@@ -22,31 +32,45 @@ public class Company {
     private List<SubCategory> subCategories;
 
 
-//
-//    private String website;
-//    private String logo;
-//    private String video;
-
     @Enumerated(EnumType.STRING)
     private StageOfTheCompany stageOfTheCompany;
 
-//
-//    private MarketValidation marketValidation;
-//
-//    private String size_of_sales___;
-//    private String status___;
-//    private String priority___;
-//    private String transfer_to___;
-//    private String investment_process___;
+    @Enumerated(EnumType.STRING)
+    private SizeOfTheSales sizeOfTheSales;
 
+    @Enumerated(EnumType.STRING)
+    private MarketValidation marketValidation;
+
+    @Enumerated(EnumType.STRING)
+    private InvestmentProcess investmentProcess;
+
+    @Enumerated(EnumType.STRING)
+    private PriorityCompany priorityCompany;
+
+    @Enumerated(EnumType.STRING)
+    private StatusCompany statusCompany;
+
+    @Enumerated(EnumType.STRING)
+    private TransferCompany transferCompany;
 
     public Company() {
+
     }
 
-    public Company(String company_name, Founder founder, StageOfTheCompany stageOfTheCompany,List<SubCategory> subCategories) {
-        this.company_name=company_name;
-        this.founder=founder;
-        this.stageOfTheCompany=stageOfTheCompany;
+
+    public Company(String company_name, Founder founder, StageOfTheCompany stageOfTheCompany,
+                   SizeOfTheSales sizeOfTheSales, MarketValidation marketValidation,
+                   InvestmentProcess investmentProcess, PriorityCompany priorityCompany,
+                   StatusCompany statusCompany, TransferCompany transferCompany, List<SubCategory> subCategories) {
+        this.company_name = company_name;
+        this.founder = founder;
+        this.stageOfTheCompany = stageOfTheCompany;
+        this.sizeOfTheSales = sizeOfTheSales;
+        this.marketValidation = marketValidation;
+        this.investmentProcess = investmentProcess;
+        this.priorityCompany = priorityCompany;
+        this.statusCompany = statusCompany;
+        this.transferCompany = transferCompany;
         this.subCategories = subCategories;
 
     }
@@ -71,12 +95,86 @@ public class Company {
         this.founder = founder;
     }
 
+
     public StageOfTheCompany getStageOfTheCompany() {
         return stageOfTheCompany;
     }
 
+    public SizeOfTheSales getSizeOfTheSales() {
+        return sizeOfTheSales;
+    }
+
+    public MarketValidation getMarketValidation() {
+        return marketValidation;
+    }
+
+
     public void setStageOfTheCompany(StageOfTheCompany stageOfTheCompany) {
         this.stageOfTheCompany = stageOfTheCompany;
+    }
+
+    public void setSizeOfTheSales(SizeOfTheSales sizeOfTheSales) {
+        this.sizeOfTheSales = sizeOfTheSales;
+    }
+
+    public void setMarketValidation(MarketValidation marketValidation) {
+        this.marketValidation = marketValidation;
+    }
+
+    public InvestmentProcess getInvestmentProcess() {
+        return investmentProcess;
+    }
+
+    public void setInvestmentProcess(InvestmentProcess investmentProcess) {
+        this.investmentProcess = investmentProcess;
+    }
+
+    public PriorityCompany getPriorityCompany() {
+        return priorityCompany;
+    }
+
+    public void setPriorityCompany(PriorityCompany priorityCompany) {
+        this.priorityCompany = priorityCompany;
+    }
+
+    public StatusCompany getStatusCompany() {
+        return statusCompany;
+    }
+
+    public void setStatusCompany(StatusCompany statusCompany) {
+        this.statusCompany = statusCompany;
+    }
+
+    public TransferCompany getTransferCompany() {
+        return transferCompany;
+    }
+
+    public void setTransferCompany(TransferCompany transferCompany) {
+        this.transferCompany = transferCompany;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+//    public String getLogo() {
+//        return logo;
+//    }
+//
+//    public void setLogo(String logo) {
+//        this.logo = logo;
+//    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
     }
 
     public List<SubCategory> getSubCategories() {
@@ -99,6 +197,9 @@ public class Company {
     public Founder getFounder() {
         return founder;
     }
+
+
+
     @Override
     public String toString()
     {

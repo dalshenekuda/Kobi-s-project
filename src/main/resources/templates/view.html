@@ -23,7 +23,7 @@
         <th> Companies: </th>
         <tbody>
         <tr th:each="company : ${companies}">
-            <td><span th:text="${company.company_name}"> </span></td>
+            <td><span th:text="${company.getCompany_name()}"> </span></td>
             <td><span > </span></td>
             <td><span > </span></td>
             <td><span > </span></td>
@@ -33,13 +33,82 @@
             <td><span > </span></td>
             <td><span > </span></td>
             <td><span > </span></td>
+            <td><span th:text="${company.getFounder().family_name}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getFounder().email}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getFounder().mobile}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getFounder().linkedin}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getFounder().country}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getWebsite()}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+<!--            <td><span th:text="${company.getLogo()}"> </span></td>-->
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getVideo()}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
             <td><span th:text="${company.getStageOfTheCompany()}"> </span></td>
             <td><span > </span></td>
             <td><span > </span></td>
             <td><span > </span></td>
             <td><span > </span></td>
+            <td><span th:text="${company.getSizeOfTheSales()}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getMarketValidation()}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getInvestmentProcess()}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getPriorityCompany()}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getStatusCompany()}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span th:text="${company.getTransferCompany()}"> </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
+            <td><span > </span></td>
             <td><span th:text="${company.getSubCategories()}"> </span></td>
-
             <td><span > </span></td>
             <td><span > </span></td>
             <td><span > </span></td>
