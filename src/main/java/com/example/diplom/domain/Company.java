@@ -19,7 +19,6 @@ public class Company {
     private String video;
 
 
-    private String vide;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "founder_id")
@@ -61,7 +60,7 @@ public class Company {
     public Company(String company_name, Founder founder, StageOfTheCompany stageOfTheCompany,
                    SizeOfTheSales sizeOfTheSales, MarketValidation marketValidation,
                    InvestmentProcess investmentProcess, PriorityCompany priorityCompany,
-                   StatusCompany statusCompany, TransferCompany transferCompany, List<SubCategory> subCategories) {
+                   StatusCompany statusCompany, TransferCompany transferCompany, List<SubCategory> subCategories,String video,String website) {
         this.company_name = company_name;
         this.founder = founder;
         this.stageOfTheCompany = stageOfTheCompany;
@@ -72,6 +71,8 @@ public class Company {
         this.statusCompany = statusCompany;
         this.transferCompany = transferCompany;
         this.subCategories = subCategories;
+        this.website=website;
+        this.video=video;
 
     }
 

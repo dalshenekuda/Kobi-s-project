@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Test tak skazat</title>
+    <title>Test</title>
 </head>
 <body>
 <a href="http://localhost:8080/addCategory">Adding category</a>
@@ -11,83 +11,144 @@
 <a href="http://localhost:8080/view">_View_</a>
 <br> <br>
 
+<style>
+    table {
+        /*border-collapse: separate;*/
+        border-spacing: 15px 0;
+    }
+
+    td {
+        padding: 5px 0;
+    }
+</style>
+
 <h2>Adding company</h2>
 <!--<div align="center">-->
 <!--<form th:action="@{/}" th:object="${stageOfTheCompanies}" method="POST">-->
 <form th:action="@{/}"  method="POST">
-<!--    акшен может ошибку выкинуть-->
-<input type="text" name="company_name" placeholder="Name of company"/>
-<input type="text" name="founder_name" placeholder="Name of founder"/>
 
 
 
-    <select name="_stageOfCompany">
-        <option th:each="stage :${stageOfTheCompanies}"
-                th:text="${stage}">
-    </select>
+    <table>
+        <tbody>
+        <tr>
+            <th>Company name</th>
+            <th>Categories</th>
+            <th>Sub Categories</th>
 
-    <select name="_sizeOfTheSales">
-        <option th:each="size :${sizeOfTheSales1}"
-                th:text="${size}">
-    </select>
+            <th>Stage Of The Company</th>
+            <th>Market Validation</th>
+            <th>Size Of The Sales</th>
+            <th>Investment Process</th>
+            <th>Priority Company</th>
+            <th>Status Company</th>
+            <th>Transfer Company</th>
 
-    <select name="_marketValidation">
-        <option th:each="market :${marketValidations}"
-                th:text="${market}">
-    </select>
+            <th>Website</th>
+            <th>Video</th>
 
-    <select name="_investmentProcess">
-        <option th:each="investment :${investmentProcesses}"
-                th:text="${investment}">
-    </select>
+        </tr>
 
-    <select name="_priorityCompany">
-        <option th:each="priority :${priorityCompanies}"
-                th:text="${priority}">
-    </select>
+        <tr>
+            <td><input type="text" name="company_name" placeholder="Name of company"/>           </td>
+            <td>
+                <select multiple="multiple" class="category" >
+                    <option th:each="category : ${CategoriesList}"
+                            th:text="${category.name}">
 
-    <select name="_statusCompany">
-        <option th:each="status :${statusCompanies}"
-                th:text="${status}">
-    </select>
+                    </option>
+                </select>
+            </td>
+            <td> <select multiple="multiple" name="subCategories_s" class="category">
+                <option th:each="sub : ${subCategoriesList}"
+                        th:value="${sub.name}"
+                        th:text="${sub.name +'  ('+sub.getCategory()+')'}">
+            </select>
+            </td>
+            <td>
 
-    <select name="_transferCompany">
-        <option th:each="transfer :${transferCompanies}"
-                th:text="${transfer}">
-    </select>
+                <select name="_stageOfCompany">
+                    <option th:each="stage :${stageOfTheCompanies}"
+                            th:text="${stage}">
+                </select></td>
+            <td>
+                <select name="_marketValidation">
+                    <option th:each="market :${marketValidations}"
+                            th:text="${market}">
+                </select>
+            </td>
 
-    <select multiple="multiple" class="category" >
-        <option th:each="category : ${CategoriesList}"
-                th:text="${category.name}">
+            <td>
+                <select name="_sizeOfTheSales">
+                    <option th:each="size :${sizeOfTheSales1}"
+                            th:value="${size}"
+                            th:text="${size.getSale()}">
+                </select></td>
 
-        </option>
-    </select>
 
-    <select multiple="multiple" name="subCategories_s" class="category">
-        <option th:each="sub : ${subCategoriesList}"
-                th:value="${sub.name}"
-                th:text="${sub.name +'  ('+sub.getCategory()+')'}">
-            <!--</option>
-            <option value="cat1">cat1</option>
-            <option value="cat2">cat2</option>-->
-    </select>
+            <td>
+            <select name="_investmentProcess">
+                <option th:each="investment :${investmentProcesses}"
+                        th:text="${investment}">
+            </select>
+            </td>
 
-<!--    <select name="subCategories">-->
-<!--        <option th:each=" sub:${subCategoriesList}"-->
-<!--                th:text="${sub.name}">-->
-<!--    </select>-->
+            <td>
+            <select name="_priorityCompany">
+                <option th:each="priority :${priorityCompanies}"
+                        th:text="${priority}">
+            </select>
+             </td>
+
+            <td>
+            <select name="_statusCompany">
+                <option th:each="status :${statusCompanies}"
+                        th:text="${status}">
+            </select>
+            </td>
+
+            <td>
+            <select name="_transferCompany">
+                <option th:each="transfer :${transferCompanies}"
+                        th:text="${transfer}">
+            </select>
+           </td>
+
+            <td> <input type="text" name="website" placeholder="Website"/>   </td>
+            <td><input type="text" name="video" placeholder="Video"/>   </td>
+        <tr/>
+
+        </tbody>
+    </table>
     <br> <br>
     <br> <br>
 
-          <input type="text" name="founder_family_name" placeholder="Family name"/>
-          <input type="text" name="founder_email" placeholder="Email"/>
-          <input type="text" name="founder_mobile" placeholder="Mobile"/>
-          <input type="text" name="founder_linkedin" placeholder="Linkedin"/>
-          <input type="text" name="founder_country" placeholder="Country"/>
-          <input type="text" name="website" placeholder="Website"/>
-<!--          <input type="text" name="logo" placeholder="Logo"/>-->
-          <input type="text" name="video" placeholder="Video"/>
 
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Founder name</th>
+            <th>Founder family name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Linkedin</th>
+            <th>Country</th>
+        </tr>
+
+        <tr>
+            <td> <input type="text" name="founder_name" placeholder="Name of founder"/></td>
+            <td><input type="text" name="founder_family_name" placeholder="Family name"/></td>
+            <td><input type="text" name="founder_email" placeholder="Email"/></td>
+            <td><input type="text" name="founder_mobile" placeholder="Mobile"/></td>
+            <td> <input type="text" name="founder_linkedin" placeholder="Linkedin"/></td>
+            <td> <input type="text" name="founder_country" placeholder="Country"/></td>
+
+        </tbody>
+    </table>
+
+    <br> <br>
+    <br> <br>
 
   <input type="submit" value="Save" />
   </form>

@@ -1,126 +1,89 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Test tak skazat</title>
+    <title>Test</title>
 </head>
 <body>
 
 <h2>View company</h2>
 
-<!--<style>-->
-<!--    ul.el > li {-->
-<!--        display: inline;	/* Располагаем элементы по горизонтали */-->
-<!--        list-style: none;	/* Убираем маркеры списка */-->
-<!--    }-->
-<!--</style>-->
+<style>
+    /*ul.el > li {*/
+    /*    display: inline;	!* Располагаем элементы по горизонтали *!*/
+    /*    list-style: none;	!* Убираем маркеры списка *!*/
+    /*}*/
+    table {
+        /*border-collapse: separate;*/
+        border-spacing: 30px 0;
+    }
+
+    td {
+        padding: 10px 0;
+    }
+</style>
 
 <a style="margin-: 32px" href="http://localhost:8080">Main</a>
 <br> <br>
 
 <form th:action="@{/view}"  method="POST">
 
+
+
     <table>
-        <th> Companies: </th>
         <tbody>
+        <tr>
+            <th>Company name</th>
+            <th>Categories</th>
+            <th>Sub Categories</th>
+
+            <th>Website</th>
+            <th>Video</th>
+            <th>Stage Of The Company</th>
+            <th>Market Validation</th>
+            <th>Size Of The Sales</th>
+            <th>Investment Process</th>
+            <th>Priority Company</th>
+            <th>Status Company</th>
+            <th>Transfer Company</th>
+
+
+            <th>Founder name</th>
+            <th>Founder family name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Linkedin</th>
+            <th>Country</th>
+        </tr>
+
         <tr th:each="company : ${companies}">
             <td><span th:text="${company.getCompany_name()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getFounder().name}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getFounder().family_name}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getFounder().email}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getFounder().mobile}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getFounder().linkedin}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getFounder().country}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getWebsite()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-<!--            <td><span th:text="${company.getLogo()}"> </span></td>-->
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getVideo()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getStageOfTheCompany()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getSizeOfTheSales()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getMarketValidation()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getInvestmentProcess()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getPriorityCompany()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getStatusCompany()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getTransferCompany()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span th:text="${company.getSubCategories()}"> </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
-            <td><span > </span></td>
             <td><span th:text="${company.getCategories()}"> </span></td>
+            <td><span th:text="${company.getSubCategories()}"> </span></td>
 
 
-        </tr>
-        </tbody>
-    </table>
-    <br> <br>
-<!--    <input type="submit" value="Save" />-->
+            <td><span th:text="${company.getWebsite()}"> </span></td>
+            <td><span th:text="${company.getVideo()}"> </span></td>
+            <td><span th:text="${company.getStageOfTheCompany()}"> </span></td>
+            <td><span th:text="${company.getMarketValidation()}"> </span></td>
+            <td><span th:text="${company.getSizeOfTheSales().getSale()}"> </span></td>
+            <td><span th:text="${company.getInvestmentProcess()}"> </span></td>
+            <td><span th:text="${company.getPriorityCompany()}"> </span></td>
+            <td><span th:text="${company.getStatusCompany()}"> </span></td>
+            <td><span th:text="${company.getTransferCompany()}"> </span></td>
+
+            <td><span th:text="${company.getFounder().name}"> </span></td>
+            <td><span th:text="${company.getFounder().family_name}"> </span></td>
+            <td><span th:text="${company.getFounder().email}"> </span></td>
+            <td><span th:text="${company.getFounder().mobile}"> </span></td>
+            <td><span th:text="${company.getFounder().linkedin}"> </span></td>
+            <td><span th:text="${company.getFounder().country}"> </span></td>
+        <tr/>
+
+
+            </tbody>
+        </table>
+        <br> <br>
+
 </form>
 </body>
 </html>

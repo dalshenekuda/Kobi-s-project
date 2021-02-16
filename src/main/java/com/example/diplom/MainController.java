@@ -123,8 +123,10 @@ import java.util.List;
                       @RequestParam String _stageOfCompany,@RequestParam String _sizeOfTheSales, @RequestParam String _marketValidation,
                       @RequestParam String _investmentProcess, @RequestParam String _priorityCompany,
                       @RequestParam String _statusCompany, @RequestParam String _transferCompany,
-                      @RequestParam String[] subCategories_s, Model model)
+                      @RequestParam String[] subCategories_s,@RequestParam String video,@RequestParam String website, Model model)
     {
+
+
 
         Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
         model.addAttribute("subCategoriesList", subCategoriesList);
@@ -137,6 +139,7 @@ import java.util.List;
 
         SizeOfTheSales[] sizeOfTheSales1 = SizeOfTheSales.values();
         model.addAttribute("sizeOfTheSales1", sizeOfTheSales1);
+
 
         MarketValidation[] marketValidations = MarketValidation.values();
         model.addAttribute("marketValidations", marketValidations);
@@ -171,7 +174,8 @@ import java.util.List;
         TransferCompany transferCompany = TransferCompany.valueOf(_transferCompany);
 
         Company company = new Company(company_name, founder, stageOfTheCompany, sizeOfTheSales, marketValidation,
-                investmentProcess, priorityCompany, statusCompany, transferCompany, subCategoriesObj);
+                investmentProcess, priorityCompany, statusCompany, transferCompany, subCategoriesObj,video,website);
+        CompanyRepo.save(company);
 
 
         return "Main";
