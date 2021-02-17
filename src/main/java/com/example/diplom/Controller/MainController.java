@@ -1,4 +1,4 @@
-package com.example.diplom;
+package com.example.diplom.Controller;
 
 import com.example.diplom.domain.*;
 import com.example.diplom.domain.enums.*;
@@ -72,7 +72,6 @@ import java.util.List;
         @PostMapping("/addCategory")
         public String addCategory(@RequestParam String category_name, Model model) {
 
-
             Category category = new Category(category_name);
             CategoryRepo.save(category);
             Iterable<Category> categories =CategoryRepo.findAll();
@@ -108,13 +107,6 @@ import java.util.List;
             return "sub";
         }
 
-//        @GetMapping
-//        public String main(Map<String, Object> model) {
-////            Iterable<Company> companies = CompanyRepo.findAll();
-////            model.put("companies", companies);
-//            return "add";
-//        }
-
 
     @PostMapping
     public String add(@RequestParam String founder_name, @RequestParam String founder_family_name,
@@ -125,9 +117,6 @@ import java.util.List;
                       @RequestParam String _statusCompany, @RequestParam String _transferCompany,
                       @RequestParam String[] subCategories_s,@RequestParam String video,@RequestParam String website, Model model)
     {
-
-
-
         Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
         model.addAttribute("subCategoriesList", subCategoriesList);
 
