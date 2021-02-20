@@ -170,12 +170,6 @@ import java.util.List;
         return "Main";
     }
 
-    @GetMapping("/view")
-    public String view(Model model) {
-        Iterable<Company> companies =CompanyRepo.findAll();
-        model.addAttribute("companies",companies);
-        return "view";
-    }
 
 //    @PostMapping("/view")
 //    public String view(@RequestParam String category_name, Model model) {

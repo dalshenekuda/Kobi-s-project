@@ -25,9 +25,104 @@
 <a style="margin-: 32px" href="http://localhost:8080">Main</a>
 <br> <br>
 
+
+
+
 <form th:action="@{/view}"  method="POST">
 
+    <table>
+        <tbody>
+        <tr>
+            <th>Founder name</th>
+            <th>Categories</th>
+<!--            <th>Sub Categories</th>-->
 
+            <th>Stage Of The Company</th>
+            <th>Market Validation</th>
+            <th>Investment Process</th>
+            <th>Priority Company</th>
+            <th>Status Company</th>
+            <th>Transfer Company</th>
+
+        </tr>
+
+        <tr>
+<!--            <td><input type="text" name="founder" placeholder="Name of founder"/>           </td>-->
+
+            <td>
+                <select name="_founder" >
+                    <option th:each="founder : ${foundersList}"
+                            th:text="${founder}">
+
+                    </option>
+                </select>
+            </td>
+
+            <td>
+                <select multiple="multiple" class="category" >
+                    <option th:each="category : ${CategoriesList}"
+                            th:text="${category.name}">
+
+                    </option>
+                </select>
+            </td>
+<!--            <td> <select multiple="multiple" name="subCategories_s" class="category">-->
+<!--                <option th:each="sub : ${subCategoriesList}"-->
+<!--                        th:value="${sub.name}"-->
+<!--                        th:text="${sub.name +'  ('+sub.getCategory()+')'}">-->
+<!--            </select>-->
+<!--            </td>-->
+            <td>
+
+                <select name="_stage">
+                    <option th:each="stage :${stageOfTheCompanies}"
+                            th:text="${stage}">
+                </select></td>
+            <td>
+                <select name="_market">
+                    <option th:each="market :${marketValidations}"
+                            th:text="${market}">
+                </select>
+            </td>
+
+            <td>
+                <select name="_investment">
+
+                    <option th:each="investment :${investmentProcesses}"
+                            th:text="${investment}">
+                </select>
+            </td>
+
+            <td>
+                <select name="_priory">
+                    <option th:each="priority :${priorityCompanies}"
+                            th:text="${priority}">
+                </select>
+            </td>
+
+            <td>
+                <select name="_status">
+                    <option th:each="status :${statusCompanies}"
+                            th:text="${status}">
+                </select>
+            </td>
+
+            <td>
+                <select name="_transfer">
+                    <option th:each="transfer :${transferCompanies}"
+                            th:text="${transfer}">
+                </select>
+            </td>
+
+        <tr/>
+
+        </tbody>
+    </table>
+    <br> <br>
+
+
+    <input type="submit" value="Filter" />
+    <br> <br>
 
     <table>
         <tbody>
@@ -83,6 +178,7 @@
             </tbody>
         </table>
         <br> <br>
+
 
 </form>
 </body>
