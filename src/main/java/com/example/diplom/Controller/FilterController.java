@@ -4,6 +4,7 @@ import com.example.diplom.domain.Company;
 import com.example.diplom.domain.Founder;
 import com.example.diplom.domain.SubCategory;
 import com.example.diplom.domain.enums.*;
+import com.example.diplom.methods.SaveFiles;
 import com.example.diplom.repos.CategoryRepo;
 import com.example.diplom.repos.CompanyRepo;
 import com.example.diplom.repos.FounderRepo;
@@ -111,7 +112,7 @@ public class FilterController {
                          @RequestParam String _stage,
                          @RequestParam String _market, @RequestParam String _status,
                          @RequestParam String _priory, @RequestParam String _transfer,
-                         @RequestParam String _investment, Model model) {
+                         @RequestParam String _investment, @RequestParam String fileName, Model model) {
 
 
         Iterable<Company> companies = CompanyRepo.findAll();
@@ -252,9 +253,9 @@ public class FilterController {
             }else
                 companiesAfterEnumsFilter.forEach(res::add);
 
+        SaveFiles.saveFileXL(res,fileName);
+
          model.addAttribute("companies",res);
-
-
 
             return "view";
         }
