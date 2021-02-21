@@ -50,16 +50,17 @@
 <!--            <td><input type="text" name="founder" placeholder="Name of founder"/>           </td>-->
 
             <td>
-                <select name="_founder" >
+                <select multiple="multiple" name="_founders" >
                     <option th:each="founder : ${foundersList}"
-                            th:text="${founder}">
+                            th:value="${founder.name+' ' +founder.getFamilyName()}"
+                            th:text="${founder.name+ ' ' + founder.getFamilyName()}">
 
                     </option>
                 </select>
             </td>
 
             <td>
-                <select multiple="multiple" class="category" >
+                <select multiple="multiple" class="category" name ="_categories">
                     <option th:each="category : ${CategoriesList}"
                             th:text="${category.name}">
 
@@ -167,7 +168,7 @@
             <td><span th:text="${company.getTransferCompany()}"> </span></td>
 
             <td><span th:text="${company.getFounder().name}"> </span></td>
-            <td><span th:text="${company.getFounder().family_name}"> </span></td>
+            <td><span th:text="${company.getFounder().familyName}"> </span></td>
             <td><span th:text="${company.getFounder().email}"> </span></td>
             <td><span th:text="${company.getFounder().mobile}"> </span></td>
             <td><span th:text="${company.getFounder().linkedin}"> </span></td>

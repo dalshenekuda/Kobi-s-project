@@ -186,6 +186,7 @@ public class Company {
 
         List<Category> categoriesAll = new ArrayList<>();
         subCategories.forEach(subCategory -> categoriesAll.add(subCategory.getCategory()));
+
         List<Category> categories = categoriesAll.stream().distinct().collect(Collectors.toList());
 
         return categories;

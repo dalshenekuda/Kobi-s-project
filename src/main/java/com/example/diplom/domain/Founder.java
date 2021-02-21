@@ -13,7 +13,7 @@ public class Founder {
     private List<Company> companies;
 
     private String name;
-    private String family_name;
+    private String familyName;
     private String email;
     private String mobile;
     private String linkedin;
@@ -22,9 +22,9 @@ public class Founder {
     public Founder(){
     }
 
-    public Founder(String name, String family_name, String email, String mobile, String linkedin, String country){
+    public Founder(String name, String familyName, String email, String mobile, String linkedin, String country){
         this.name=name;
-        this.family_name = family_name;
+        this.familyName = familyName;
         this.email = email;
         this.mobile = mobile;
         this.linkedin = linkedin;
@@ -35,8 +35,8 @@ public class Founder {
         return name;
     }
 
-    public String getFamily_name() {
-        return family_name;
+    public String getFamilyName() {
+        return familyName;
     }
 
     public String getEmail() {
@@ -59,8 +59,8 @@ public class Founder {
         this.name = name;
     }
 
-    public void setFamily_name(String family_name) {
-        this.family_name = family_name;
+    public void setFamilyName(String family_name) {
+        this.familyName = family_name;
     }
 
     public void setEmail(String email) {
@@ -97,6 +97,14 @@ public class Founder {
     @Override
     public String toString()
     {
-        return ""+name;
+        return ""+name+" "+ familyName;
+    }
+
+
+    public  boolean equalsForFilter(Founder founder) {
+        boolean b=true;
+        if (this.name!=founder.name || this.familyName !=founder.familyName)
+            b=false;
+     return b;
     }
 }

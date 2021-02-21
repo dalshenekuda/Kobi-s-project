@@ -2,6 +2,7 @@ package com.example.diplom.Controller;
 import com.example.diplom.domain.Category;
 import com.example.diplom.domain.Company;
 import com.example.diplom.domain.Founder;
+import com.example.diplom.domain.SubCategory;
 import com.example.diplom.domain.enums.*;
 import com.example.diplom.repos.CategoryRepo;
 import com.example.diplom.repos.CompanyRepo;
@@ -37,12 +38,7 @@ public class FilterController {
         model.addAttribute("companies", companies);
 
         Iterable<Founder> foundersList = FounderRepo.findAll();
-        List<String> f = new ArrayList<>();
-        f.add("NONE");
-        for (Founder e : foundersList) {
-            f.add(e + "");
-        }
-        model.addAttribute("foundersList", f);
+        model.addAttribute("foundersList", foundersList);
 
 
         Iterable<Category> CategoriesList = CategoryRepo.findAll();
@@ -50,6 +46,12 @@ public class FilterController {
         CategoriesList.forEach(list1::add);
 
         model.addAttribute("CategoriesList", list1);
+
+        Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
+       // List<Category> list1 = new ArrayList<>();
+       // CategoriesList.forEach(list1::add);
+
+        model.addAttribute("subCategoriesList", subCategoriesList);
 
 
         StageOfTheCompany[] stageOfTheCompanies = StageOfTheCompany.values();
@@ -105,21 +107,18 @@ public class FilterController {
 
     //    @RequestParam String founder,@RequestParam String category,
     @PostMapping("/view")
-    public String filter(@RequestParam String _founder,@RequestParam String _stage,
+    public String filter(@RequestParam(required = false) List<String> _founders,@RequestParam (required = false) List<String> _categories,
+                         @RequestParam String _stage,
                          @RequestParam String _market, @RequestParam String _status,
-                         @RequestParam String _priory, @RequestParam String _transfer, @RequestParam String _investment, Model model) {
+                         @RequestParam String _priory, @RequestParam String _transfer,
+                         @RequestParam String _investment, Model model) {
 
 
         Iterable<Company> companies = CompanyRepo.findAll();
         model.addAttribute("companies", companies);
 
         Iterable<Founder> foundersList = FounderRepo.findAll();
-        List<String> f = new ArrayList<>();
-        f.add("NONE");
-        for (Founder e : foundersList) {
-            f.add(e + "");
-        }
-        model.addAttribute("foundersList", f);
+        model.addAttribute("foundersList", foundersList);
 
         Iterable<Category> CategoriesList = CategoryRepo.findAll();
         List<Category> list1 = new ArrayList<>();
@@ -178,16 +177,8 @@ public class FilterController {
         model.addAttribute("investmentProcesses", i);
 
 
-
-
-
-
-        Founder founder = null;
-        if (!_founder.equals("NONE"))
-               founder= FounderRepo.findAllByName(_founder);
-
         StageOfTheCompany stage = null;
-        if (!_stage.equals("NONE"))
+        if (!_stage.equalsIgnoreCase("NONE"))
             stage = StageOfTheCompany.valueOf(_stage);
 
         MarketValidation market = null;
@@ -210,12 +201,64 @@ public class FilterController {
         if (!_investment.equalsIgnoreCase("NONE"))
             investment = InvestmentProcess.valueOf(_investment);
 
-        companies = CompanyRepo.findByFounderAndStageOfTheCompanyAndMarketValidationAndStatusCompanyAndPriorityCompanyAndTransferCompanyAndInvestmentProcess(founder,stage, market,
-                status, priory, transfer, investment);
-
-        model.addAttribute("companies", companies);
+        companies = CompanyRepo.findByStageOfTheCompanyAndMarketValidationAndStatusCompanyAndPriorityCompanyAndTransferCompanyAndInvestmentProcess(
+                stage, market, status, priory, transfer, investment);
 
 
-        return "view";
+        List<Company> companiesAfterEnumsFilter = new ArrayList<>();
+        List<Company> companiesTmp = new ArrayList<>();
+
+        if ((_founders != null)) {
+            Founder founder = null;
+
+            companies.forEach(companiesTmp::add);
+            String s1;
+            String s2;
+
+            for (String e : _founders) {
+                String[] str = e.split(" ");
+                s1 = str[0];
+                s2 = str[1];
+                founder = FounderRepo.findByNameAndFamilyName(s1, s2);
+                for (Company c : companiesTmp) {
+                    if (c.getFounder().equalsForFilter(founder)) {
+                        companiesAfterEnumsFilter.add(c);
+                    }
+                }
+            }
+
+        }
+        if(companiesAfterEnumsFilter.isEmpty())
+            companies.forEach(companiesAfterEnumsFilter::add);
+
+        //  companiesAfterEnumsFilter
+
+            List<Company> res= new ArrayList<>();
+
+            companiesTmp.clear();
+            if ((_categories != null)) {
+                Category category = null;
+
+                for (String e : _categories) {
+                    category = CategoryRepo.findByName(e);
+
+                    for (Company c : companiesAfterEnumsFilter) {
+                        if (c.getCategories().contains(category)) {
+                            companiesTmp.add(c);
+                        }
+                    }
+                }
+                companiesTmp.forEach(res::add);
+            }else
+                companiesAfterEnumsFilter.forEach(res::add);
+
+         model.addAttribute("companies",res);
+
+
+
+            return "view";
+        }
+
+
+
     }
-}

@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface FounderRepo extends CrudRepository<Founder,Long> {
 
-    Founder findAllByName(String name);
+    Founder findByNameAndFamilyName(String name, String fam);
 }
