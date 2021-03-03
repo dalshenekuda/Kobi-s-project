@@ -178,7 +178,11 @@
 <!--            <td> <img th:src="@{/img/{filename}(filename = ${company.filename})}"></td>-->
 <!--            <td> <hr th:src="@{/file/{infoFilename}(infoFilename = ${company.infoFilename})}"> </td>-->
 <!--            <td> <th:href ="@{/img/{filename}(filename = ${company.filename})}"></td>&ndash;&gt;-->
-            <td><a th:href="/file/e9d56f11-dd77-40be-b385-d19ba59c8dbf.5_maXQOI0cw.jpg" download>Скачать файл</a><td>
+<!--            <td> <a th:href="@{|/file/download|}">DOWN<span th:text="${company.infoFilename}"></span></a></td>-->
+
+<!--            <td><a download="results.csv" th:href=""</a></td>-->
+
+            <!--            <td><a th:href="/file/C:/Java/Kobi-s-project/uploads/e9d56f11-dd77-40be-b385-d19ba59c8dbf.5_maXQOI0cw.jpg" download>Скачать файл</a><td>-->
 
         <tr/>
 

@@ -268,10 +268,17 @@ public class FilterController {
     byte[] image(@PathVariable String imageUrl) throws IOException {
         String url = "C:/Java/Kobi-s-project/uploads/" + imageUrl; //здесь указываете СВОЙ путь к папке с картинками
 //         String url = ${upload.path} + imageUrl;
-        System.out.println("${upload.path}");
+      //  System.out.println("${upload.path}");
         InputStream in = new FileInputStream(url);
         return IOUtils.toByteArray(in);
     }
+
+//    @RequestMapping(value="/products/download", method=RequestMethod.GET)
+//    @ResponseBody
+//    public FileSystemResource downloadFile(@Param(value="id") Long id) {
+//        Product product = productRepo.findOne(id);
+//        return new FileSystemResource(new File(product.getFileUrl()));
+//    }
 
 //"${upload.path}"
 

@@ -125,7 +125,8 @@ import java.util.UUID;
                       @RequestParam String _statusCompany, @RequestParam String _transferCompany,
                       @RequestParam (required = false)String[] subCategories_s, @RequestParam (required = false) String video,
                       @RequestParam (required = false) String website,
-                      @RequestParam("file") MultipartFile file,@RequestParam("file") MultipartFile infoFile, Model model) throws IOException {
+                      @RequestParam("file") MultipartFile file,@RequestParam("infoFile") MultipartFile infoFile, Model model) throws IOException {
+
         Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
         model.addAttribute("subCategoriesList", subCategoriesList);
 
@@ -156,11 +157,13 @@ import java.util.UUID;
 
         List<String> subCategories = new ArrayList<String>() {
         };
+
         List<SubCategory> subCategoriesObj = new ArrayList<SubCategory>();
-        subCategories = Arrays.asList(subCategories_s);///ЛИСТ СТРИНГОВ
+        if(subCategories_s!=null) {
+            subCategories = Arrays.asList(subCategories_s);///ЛИСТ СТРИНГОВ
 
-        subCategories.forEach(nameS -> subCategoriesObj.add(SubCategoryRepo.findByName(nameS)));
-
+            subCategories.forEach(nameS -> subCategoriesObj.add(SubCategoryRepo.findByName(nameS)));
+        }
         Founder founder = new Founder(founder_name, founder_family_name, founder_email, founder_mobile, founder_linkedin, founder_country);
         FounderRepo.save(founder);
 
@@ -197,7 +200,7 @@ import java.util.UUID;
             }
 
             String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+            String resultFilename = uuidFile + "." + infoFile.getOriginalFilename();
             infoFile.transferTo(new File(uploadPath + "/" + resultFilename));
             company.setInfoFilename(resultFilename);
 
