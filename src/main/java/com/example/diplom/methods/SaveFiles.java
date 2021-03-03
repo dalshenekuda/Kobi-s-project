@@ -38,6 +38,11 @@ public class SaveFiles {
                 rowhead.createCell(13).setCellValue("Linkedin");
                 rowhead.createCell(14).setCellValue("Country");
 
+                rowhead.createCell(15).setCellValue("Categories");
+                rowhead.createCell(16).setCellValue("Sub categories");
+
+                rowhead.createCell(17).setCellValue("PDFfile");
+
 
 
         for (int i=0    ;i<companies.size();i++) {
@@ -59,6 +64,10 @@ public class SaveFiles {
             row.createCell(12).setCellValue(companies.get(i).getFounder().getEmail());
             row.createCell(13).setCellValue(companies.get(i).getFounder().getLinkedin());
             row.createCell(14).setCellValue(companies.get(i).getFounder().getCountry());
+
+            row.createCell(15).setCellValue(companies.get(i).getCategories().toString());
+            row.createCell(16).setCellValue(companies.get(i).getSubCategories().toString());
+            row.createCell(17).setCellValue(companies.get(i).getFilename());
         }
 
             FileOutputStream fileOut = new FileOutputStream(filename);

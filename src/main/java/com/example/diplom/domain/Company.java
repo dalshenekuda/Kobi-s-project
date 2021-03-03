@@ -18,6 +18,9 @@ public class Company {
  //   private String logo;
     private String video;
 
+    private String filename;
+    private String infoFilename;
+
 
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -207,5 +210,21 @@ public class Company {
     {
      return "Company: " + company_name + " |           founder: "+ founder + " |     stage of company: "+
               stageOfTheCompany ;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public String getInfoFilename() {
+        return infoFilename;
+    }
+
+    public void setInfoFilename(String infoFilename) {
+        this.infoFilename = infoFilename;
     }
 }

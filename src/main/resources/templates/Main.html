@@ -34,7 +34,7 @@
 <h2>Adding company</h2>
 <!--<div align="center">-->
 <!--<form th:action="@{/}" th:object="${stageOfTheCompanies}" method="POST">-->
-<form th:action="@{/}"  method="POST">
+<form th:action="@{/}"  method="POST" enctype="multipart/form-data">
 
 
 
@@ -125,6 +125,16 @@
 
             <td> <input type="text" name="website" placeholder="Website"/>   </td>
             <td><input type="text" name="video" placeholder="Video"/>   </td>
+
+            <td>
+                <input type="file" name="file" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+            </td>
+
+            <td>
+                <input type="file" name="file" id="customFile2">
+                <label class="custom-file-label" for="customFile2">Choose PDF file</label>
+            </td>
         <tr/>
 
         </tbody>

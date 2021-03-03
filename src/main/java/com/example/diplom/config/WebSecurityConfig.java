@@ -24,7 +24,7 @@ import javax.sql.DataSource;
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .authorizeRequests()
-                    .antMatchers("/view","/registration").permitAll()
+                    .antMatchers("/view","/registration","/test","/img/**","/file/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()

@@ -9,18 +9,18 @@ import com.example.diplom.repos.CategoryRepo;
 import com.example.diplom.repos.CompanyRepo;
 import com.example.diplom.repos.FounderRepo;
 import com.example.diplom.repos.SubCategoryRepo;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.expression.Lists;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 @Controller
 public class FilterController {
@@ -253,13 +253,27 @@ public class FilterController {
             }else
                 companiesAfterEnumsFilter.forEach(res::add);
 
+            Set<Company> resS= new HashSet<>(res);
         SaveFiles.saveFileXL(res,fileName);
 
-         model.addAttribute("companies",res);
+
+         model.addAttribute("companies",resS);
 
             return "view";
         }
 
+
+    @GetMapping(value = "/img/{imageUrl}")
+    public @ResponseBody
+    byte[] image(@PathVariable String imageUrl) throws IOException {
+        String url = "C:/Java/Kobi-s-project/uploads/" + imageUrl; //здесь указываете СВОЙ путь к папке с картинками
+//         String url = ${upload.path} + imageUrl;
+        System.out.println("${upload.path}");
+        InputStream in = new FileInputStream(url);
+        return IOUtils.toByteArray(in);
+    }
+
+//"${upload.path}"
 
 
     }
