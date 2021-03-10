@@ -36,8 +36,14 @@ import java.util.UUID;
     @Value("${upload.path}")
     private String uploadPath;
 
+    @GetMapping("/")
+    public  String greeting(){
+        return  "greeting";
+    }
 
-    @GetMapping
+
+
+    @GetMapping("/Main")
     public String test1(Model model) {
         Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
         model.addAttribute("subCategoriesList", subCategoriesList);

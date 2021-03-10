@@ -11,12 +11,14 @@ import com.example.diplom.repos.FounderRepo;
 import com.example.diplom.repos.SubCategoryRepo;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.expression.Lists;
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -272,12 +274,21 @@ public class FilterController {
         InputStream in = new FileInputStream(url);
         return IOUtils.toByteArray(in);
     }
+    @GetMapping(value = "/file/{fileUrl}")
+    public @ResponseBody
+    byte[] file(@PathVariable String fileUrl) throws IOException {
+        String url = "C:/Java/Kobi-s-project/uploads/" + fileUrl; //здесь указываете СВОЙ путь к папке с картинками
+//         String url = ${upload.path} + imageUrl;
+        //  System.out.println("${upload.path}");
+        InputStream in = new FileInputStream(url);
+        return IOUtils.toByteArray(in);
+    }
 
-//    @RequestMapping(value="/products/download", method=RequestMethod.GET)
+//    @RequestMapping(value="/file/{fileUrl}", method=RequestMethod.GET)
 //    @ResponseBody
-//    public FileSystemResource downloadFile(@Param(value="id") Long id) {
+//    public File downloadFile(@Param(value="id") Long id) {
 //        Product product = productRepo.findOne(id);
-//        return new FileSystemResource(new File(product.getFileUrl()));
+//        return new File(new File(product.getFileUrl()));
 //    }
 
 //"${upload.path}"
