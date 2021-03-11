@@ -29,4 +29,5 @@ public interface CompanyRepo extends CrudRepository<Company, Long> {
            @Param("transferCompany")TransferCompany transferCompany,
            @Param("investmentProcess")InvestmentProcess investmentProcess);
 
+   Company findById(Integer id);
 }

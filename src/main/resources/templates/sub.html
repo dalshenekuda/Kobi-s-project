@@ -1,12 +1,14 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:display="http://www.w3.org/1999/xhtml"
+      xmlns:style="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Test tak skazat</title>
+    <title>Adding sub category</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 <div th:replace="navbar"></div>
+<div class="container-fluid">
 <br> <br>
 
 <h2>Adding sub category</h2>
@@ -16,6 +18,9 @@
         display: inline;	/* Располагаем элементы по горизонтали */
         list-style: none;	/* Убираем маркеры списка */
     }
+    .n1{
+        display: inline;
+    }
 </style>
 
 <br> <br>
@@ -24,18 +29,35 @@
 <!--    <form th:action="@{/addSub}" th:object="${categories}" method="POST">-->
 
 
+    <ul class="navbar-nav mr-auto">
 
-    <ul class="el">
-        <li><input type="text" name="sub_category_name" placeholder="Sub category'name"/></li>
-        <li>
-        <select name="category_name">
-            <option th:each="category :${categories}"
-                    th:text="${category.name}">
-        </select>
+
+
+        <li  class="col-sm-3">
+            <select class="form-control" name="category_name">
+                <option th:each="category :${categories}"
+                        th:text="${category.name}">
+            </select>
+        </li>
+        <br>
+
+        <li  class="col-sm-3" >
+            <input class="form-control" type="text" name="sub_category_name" placeholder="Sub category'name"/>
         </li>
     </ul>
+    <br>
 
-    <table>
+
+
+
+    <!--    <div class="form-group row">-->
+<!--        <label class="col-sm-2 col-form-label"> User Name : </label>-->
+<!--        <div class="col-sm-3">-->
+<!--            <input class="form-control" type="text" name="username"/>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <table style="margin-left: 17px">
 
         <th> Sub categories: </th>
         <th> </th>
@@ -43,15 +65,16 @@
         <tbody>
         <tr th:each="subCategory : ${subCategories}">
             <td><span th:text="${subCategory.sub_category_id}"></span></td>
-            <td><span th:text="${subCategory.name}"> </span></td>
+            <td><span th:text="${subCategory.name + '   ( ' +subCategory.category+ ' )'}"> </span></td>
         </tr>
         </tbody>
     </table>
     <br> <br>
-    <input type="submit" value="Save" />
+    <input class="btn btn-primary" type="submit" value="Save" />
 </form>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</div>
 </body>
 </html>

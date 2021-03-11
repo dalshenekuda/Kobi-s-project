@@ -1,13 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Test tak skazat</title>
+    <title>Adding category</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 
 <div th:replace="navbar"></div>
+<div class="container-fluid">
 <br> <br>
 
 <h2>Adding category</h2>
@@ -16,29 +17,30 @@
 
 <form th:action="@{/addCategory}" th:object="${categories}" method="POST">
 
-    <input type="text" name="category_name" placeholder="Name of new category"/>
-
-
-    <table>
-
+    <div class="col-sm-3">
+    <input class="form-control" type="text" name="category_name" placeholder="Name of new category"/>
+    </div>
+<br>
+    <table style="margin-left: 17px">
             <th> Categories: </th>
         <th> </th>
 
         <tbody>
         <tr th:each="category : ${categories}">
             <td><span th:text="${category.category_id}"></span></td>
-            <td><span th:text="${category.name}"> </span></td>
+            <td><span th:text="${category.name}" > </span></td>
         </tr>
         </tbody>
     </table>
 
 
 
-
-    <input type="submit" value="Save" />
+    <br> <br>
+    <input class="btn btn-primary" type="submit" value="Save" />
 </form>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</div>
 </body>
 </html>

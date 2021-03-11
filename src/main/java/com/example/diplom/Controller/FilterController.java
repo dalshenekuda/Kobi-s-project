@@ -35,6 +35,15 @@ public class FilterController {
     @Autowired
     private SubCategoryRepo SubCategoryRepo;
 
+    @GetMapping("/company")
+    public String view1(String id,Model model) {
+
+        Integer idd = Integer.parseInt(id);
+        Company company = CompanyRepo.findById(idd);
+        model.addAttribute("company",company);
+        return"company";
+    }
+
     @GetMapping("/view")
     public String view(Model model) {
         Iterable<Company> companies = CompanyRepo.findAll();
@@ -50,11 +59,11 @@ public class FilterController {
 
         model.addAttribute("CategoriesList", list1);
 
-        Iterable<SubCategory> subCategoriesList = SubCategoryRepo.findAll();
+        Iterable<SubCategory> SubCategoriesList = SubCategoryRepo.findAll();
        // List<Category> list1 = new ArrayList<>();
        // CategoriesList.forEach(list1::add);
 
-        model.addAttribute("subCategoriesList", subCategoriesList);
+        model.addAttribute("SubCategoriesList", SubCategoriesList);
 
 
         StageOfTheCompany[] stageOfTheCompanies = StageOfTheCompany.values();
@@ -108,10 +117,9 @@ public class FilterController {
         return "view";
     }
 
-    //    @RequestParam String founder,@RequestParam String category,
     @PostMapping("/view")
     public String filter(@RequestParam(required = false) List<String> _founders,@RequestParam (required = false) List<String> _categories,
-                         @RequestParam String _stage,
+                         @RequestParam (required = false) List<String> subCategories_s, @RequestParam String _stage,
                          @RequestParam String _market, @RequestParam String _status,
                          @RequestParam String _priory, @RequestParam String _transfer,
                          @RequestParam String _investment, @RequestParam String fileName, Model model) {
@@ -126,9 +134,15 @@ public class FilterController {
         Iterable<Category> CategoriesList = CategoryRepo.findAll();
         List<Category> list1 = new ArrayList<>();
 
-        CategoriesList.forEach(list1::add);
+        Iterable<SubCategory> SubCategoriesList = SubCategoryRepo.findAll();
+        List<SubCategory> list2 = new ArrayList<>();
 
+        CategoriesList.forEach(list1::add);
         model.addAttribute("CategoriesList", list1);
+
+        SubCategoriesList.forEach(list2::add);
+        model.addAttribute("SubCategoriesList", list2);
+
 
 
         StageOfTheCompany[] stageOfTheCompanies = StageOfTheCompany.values();
@@ -229,7 +243,6 @@ public class FilterController {
                     }
                 }
             }
-
         }
         if(companiesAfterEnumsFilter.isEmpty())
             companies.forEach(companiesAfterEnumsFilter::add);
@@ -254,15 +267,32 @@ public class FilterController {
                 companiesTmp.forEach(res::add);
             }else
                 companiesAfterEnumsFilter.forEach(res::add);
+//res
+        companiesTmp.clear();
 
-            Set<Company> resS= new HashSet<>(res);
-        SaveFiles.saveFileXL(res,fileName);
+        if ((subCategories_s != null)) {
+            SubCategory subCategory = null;
 
-
-         model.addAttribute("companies",resS);
-
-            return "view";
+            for (String e : subCategories_s) {
+                subCategory = SubCategoryRepo.findByName(e);
+                //System.out.println(e);
+                for (Company c : res) {
+                    if (c.getSubCategories().contains(subCategory)) {
+                        companiesTmp.add(c);
+                    }
+                }
+            }
+            res.clear();
+            res=companiesTmp;//////
         }
+            //companiesTmp.forEach(res::add);
+        Set<Company> resS= new HashSet<>(res);
+        SaveFiles.saveFileXL(res,fileName);
+        model.addAttribute("companies",resS);
+
+
+        return "view";
+    }
 
 
     @GetMapping(value = "/img/{imageUrl}")

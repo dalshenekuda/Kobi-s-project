@@ -1,14 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Test</title>
+    <title>View companies</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 <div th:replace="navbar"></div>
-<br> <br>
-<h2>View company</h2>
+<div class="container-fluid">
+<br>
+<h2>View companies</h2>
 
 <style>
     /*ul.el > li {*/
@@ -25,115 +26,106 @@
     }
 </style>
 
-<br> <br>
+<br>
 
 <form th:action="@{/view}"  method="POST">
 
-    <table>
-        <tbody>
-        <tr>
-            <th>Founder name</th>
-            <th>Categories</th>
-<!--            <th>Sub Categories</th>-->
+            <div class="form-row" >
+                <div class="col-md-1,8 mb-4">
+                    <label >Founder</label>
+                    <select multiple="multiple" name="_founders" class="form-control">
+                        <option th:each="founder : ${foundersList}"
+                                th:value="${founder.name+' ' +founder.getFamilyName()}"
+                                th:text="${founder.name+ ' ' + founder.getFamilyName()}">
 
-            <th>Stage Of The Company</th>
-            <th>Market Validation</th>
-            <th>Investment Process</th>
-            <th>Priority Company</th>
-            <th>Status Company</th>
-            <th>Transfer Company</th>
+                        </option>
+                    </select>
+                </div>
 
-        </tr>
+                <div class="col-md-1,8 mb-3">
+                    <label >Category</label>
+                    <select multiple="multiple" name ="_categories" class="form-control">
+                        <option th:each="category : ${CategoriesList}"
+                                th:text="${category.name}">
 
-        <tr>
-<!--            <td><input type="text" name="founder" placeholder="Name of founder"/>           </td>-->
+                        </option>
+                    </select>
+                </div>
 
-            <td>
-                <select multiple="multiple" name="_founders" >
-                    <option th:each="founder : ${foundersList}"
-                            th:value="${founder.name+' ' +founder.getFamilyName()}"
-                            th:text="${founder.name+ ' ' + founder.getFamilyName()}">
+                <div class="col-md-1,8 mb-3">
+                    <label >Sub category</label>
+                    <select multiple="multiple" name ="subCategories_s" class="form-control">
+                        <option th:each="sub : ${SubCategoriesList}"
+                                th:value="${sub.name}"
+                                th:text="${sub.name +'  ('+sub.getCategory()+')'}">
+                        </option>
+                    </select>
+                </div>
 
-                    </option>
-                </select>
-            </td>
+                <div class="col-md-1,7 mb-3">
+                    <label >Stage Of The Companies</label>
+                    <select name="_stage" class="form-control">
+                        <option th:each="stage :${stageOfTheCompanies}"
+                                th:text="${stage}">
+                    </select>
+                </div>
 
-            <td>
-                <select multiple="multiple" class="category" name ="_categories">
-                    <option th:each="category : ${CategoriesList}"
-                            th:text="${category.name}">
+                <div class="col-md-1,7 mb-3">
+                    <label >Market Validations</label>
+                    <select name="_market" class="form-control">
+                        <option th:each="market :${marketValidations}"
+                                th:text="${market}">
+                    </select>
+                </div>
 
-                    </option>
-                </select>
-            </td>
-<!--            <td> <select multiple="multiple" name="subCategories_s" class="category">-->
-<!--                <option th:each="sub : ${subCategoriesList}"-->
-<!--                        th:value="${sub.name}"-->
-<!--                        th:text="${sub.name +'  ('+sub.getCategory()+')'}">-->
-<!--            </select>-->
-<!--            </td>-->
-            <td>
+                <div class="col-md-1,7 mb-3">
+                    <label >Investment Processes</label>
+                    <select name="_investment" class="form-control">
+                        <option th:each="investment :${investmentProcesses}"
+                                th:text="${investment}">
+                    </select>
+                </div>
 
-                <select name="_stage">
-                    <option th:each="stage :${stageOfTheCompanies}"
-                            th:text="${stage}">
-                </select></td>
-            <td>
-                <select name="_market">
-                    <option th:each="market :${marketValidations}"
-                            th:text="${market}">
-                </select>
-            </td>
+                <div class="col-md-1,7 mb-3">
+                    <label >Priority Companies</label>
+                    <select name="_priory" class="form-control">
+                        <option th:each="priority :${priorityCompanies}"
+                                th:text="${priority}">
+                    </select>
+                </div>
 
-            <td>
-                <select name="_investment">
+                <div class="col-md-1,7 mb-3">
+                    <label >Status Companies</label>
+                    <select name="_status" class="form-control">
+                        <option th:each="status :${statusCompanies}"
+                                th:text="${status}">
+                    </select>
+                </div>
 
-                    <option th:each="investment :${investmentProcesses}"
-                            th:text="${investment}">
-                </select>
-            </td>
+                <div class="col-md-1.5 mb-3">
+                    <label >Transfer Companies</label>
+                    <select name="_transfer" class="form-control">
+                        <option th:each="transfer :${transferCompanies}"
+                                th:text="${transfer}">
+                    </select>
+                </div>
+            </div>
 
-            <td>
-                <select name="_priory">
-                    <option th:each="priority :${priorityCompanies}"
-                            th:text="${priority}">
-                </select>
-            </td>
+    <br>
+     <input type="text" class="form-control mb-2 col-md-3 "  name="fileName" placeholder="Enter the filename, if you want save XLS file"/>
+    <input class="btn btn-primary" type="submit" value="Filter" />
+    <br>
+    <br>
 
-            <td>
-                <select name="_status">
-                    <option th:each="status :${statusCompanies}"
-                            th:text="${status}">
-                </select>
-            </td>
+    <table class="table-striped ">
+        <thead class="thead">
 
-            <td>
-                <select name="_transfer">
-                    <option th:each="transfer :${transferCompanies}"
-                            th:text="${transfer}">
-                </select>
-            </td>
-
-        <tr/>
-
-        </tbody>
-    </table>
-    <br> <br>
-
-    <td> <input type="text" name="fileName" placeholder="Name of file"/></td>
-    <br> <br>
-    <input type="submit" value="Filter" />
-    <br> <br>
-
-    <table>
-        <tbody>
-        <tr>
             <th>Company name</th>
             <th>Categories</th>
             <th>Sub Categories</th>
 
-            <th>Website</th>
-            <th>Video</th>
+<!--            <th>Website</th>-->
+<!--            <th>Video</th>-->
             <th>Stage Of The Company</th>
             <th>Market Validation</th>
             <th>Size Of The Sales</th>
@@ -143,22 +135,21 @@
             <th>Transfer Company</th>
 
 
-            <th>Founder name</th>
-            <th>Founder family name</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>Linkedin</th>
-            <th>Country</th>
-        </tr>
+            <th>Founder</th>
+<!--            <th>Founder family name</th>-->
+<!--            <th>Email</th>-->
+<!--            <th>Mobile</th>-->
+<!--            <th>Linkedin</th>-->
+<!--            <th>Country</th>-->
+        </thead>
 
         <tr th:each="company : ${companies}">
-            <td><span th:text="${company.getCompany_name()}"> </span></td>
+
+            <td> <a th:href="@{/company(id=${company.getId()})}"><span th:text="${company.getCompany_name()}"></span></a><td>
             <td><span th:text="${company.getCategories()}"> </span></td>
             <td><span th:text="${company.getSubCategories()}"> </span></td>
-
-
-            <td><span th:text="${company.getWebsite()}"> </span></td>
-            <td><span th:text="${company.getVideo()}"> </span></td>
+<!--            <td><span th:text="${company.getWebsite()}"> </span></td>-->
+<!--            <td><span th:text="${company.getVideo()}"> </span></td>-->
             <td><span th:text="${company.getStageOfTheCompany()}"> </span></td>
             <td><span th:text="${company.getMarketValidation()}"> </span></td>
             <td><span th:text="${company.getSizeOfTheSales().getSale()}"> </span></td>
@@ -167,17 +158,17 @@
             <td><span th:text="${company.getStatusCompany()}"> </span></td>
             <td><span th:text="${company.getTransferCompany()}"> </span></td>
 
-            <td><span th:text="${company.getFounder().name}"> </span></td>
-            <td><span th:text="${company.getFounder().familyName}"> </span></td>
-            <td><span th:text="${company.getFounder().email}"> </span></td>
-            <td><span th:text="${company.getFounder().mobile}"> </span></td>
-            <td><span th:text="${company.getFounder().linkedin}"> </span></td>
-            <td><span th:text="${company.getFounder().country}"> </span></td>
+            <td><span th:text="${company.getFounder().name + ' '+ company.getFounder().name}"> </span></td>
+<!--            <td><span th:text="${company.getFounder().familyName}"> </span></td>-->
+<!--            <td><span th:text="${company.getFounder().email}"> </span></td>-->
+<!--            <td><span th:text="${company.getFounder().mobile}"> </span></td>-->
+<!--            <td><span th:text="${company.getFounder().linkedin}"> </span></td>-->
+<!--            <td><span th:text="${company.getFounder().country}"> </span></td>-->
 
 <!--            <td> <img th:src="@{/img/{filename}(filename = ${company.filename})}"></td>-->
 <!--            <td> <hr th:src="@{/file/{infoFilename}(infoFilename = ${company.infoFilename})}"> </td>-->
 <!--            <td> <th:href ="@{/img/{filename}(filename = ${company.filename})}"></td>&ndash;&gt;-->
-            <td> <a th:href="@{/file/download/{infoFilename}(infoFilename=${company.infoFilename})}">down<span th:text="${company.infoFilename}"></span></a></td>
+<!--            <td> <a th:href="@{/file/download/{infoFilename}(infoFilename=${company.infoFilename})}">down<span th:text="${company.infoFilename}"></span></a></td>-->
 
 <!--            <td><a download="results.csv" th:href=""</a></td>-->
 <!--            <a th:href="@{|/products/download?id=${product.id}|}"><span th:text="${product.name}"></span></a>-->
@@ -187,7 +178,7 @@
         <tr/>
 
 
-            </tbody>
+            </tbody-dark>
         </table>
         <br> <br>
 
@@ -196,5 +187,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</div>
 </body>
 </html>

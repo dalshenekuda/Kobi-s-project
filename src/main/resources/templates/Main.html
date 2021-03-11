@@ -3,21 +3,18 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <title>Test</title>
+    <title>Adding company</title>
 </head>
 <body>
 <div th:replace="navbar"></div>
-<br> <br>
+<div class="container-fluid">
+<br>
 
 <div>
-<!--<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
 </div>
-
-
 
 <style>
     table {
@@ -29,150 +26,415 @@
         padding: 5px 0;
     }
 </style>
-
 <h2>Adding company</h2>
-<!--<div align="center">-->
 <!--<form th:action="@{/}" th:object="${stageOfTheCompanies}" method="POST">-->
 <form th:action="@{/}"  method="POST" enctype="multipart/form-data">
+    <br>
 
+    <form class="needs-validation" novalidate>
+        <div class="form-row">
+            <div class="col-md-2 mb-3">
+                <label >Company name</label>
+                <input type="text" name="company_name" class="form-control" placeholder="Company name" required>
+            </div>
 
-
-    <table>
-        <tbody>
-        <tr>
-            <th>Company name</th>
-            <th>Categories</th>
-            <th>Sub Categories</th>
-
-            <th>Stage Of The Company</th>
-            <th>Market Validation</th>
-            <th>Size Of The Sales</th>
-            <th>Investment Process</th>
-            <th>Priority Company</th>
-            <th>Status Company</th>
-            <th>Transfer Company</th>
-
-            <th>Website</th>
-            <th>Video</th>
-
-        </tr>
-
-        <tr>
-            <td><input type="text" name="company_name" placeholder="Name of company"/>           </td>
-            <td>
-                <select multiple="multiple" class="category" >
+            <div class="col-md-2 mb-3" style="">
+                <label name="category">Category</label>
+                <select multiple="multiple"  class="form-control">
                     <option th:each="category : ${CategoriesList}"
                             th:text="${category.name}">
-
                     </option>
                 </select>
-            </td>
-            <td> <select multiple="multiple" name="subCategories_s" class="category">
-                <option th:each="sub : ${subCategoriesList}"
+            </div>
+
+            <div class="col-md-2 mb-3" style="">
+                <label name="category">Sub category</label>
+                <select multiple="multiple" name="subCategories_s" class="form-control">
+                    <option th:each="sub : ${subCategoriesList}"
                         th:value="${sub.name}"
                         th:text="${sub.name +'  ('+sub.getCategory()+')'}">
-            </select>
-            </td>
-            <td>
+                    </option>
+                </select>
+            </div>
 
-                <select name="_stageOfCompany">
+            <div class="col-md-2 mb-3">
+                <label >Stage Of The Company</label>
+                <select name="_stageOfCompany" type="text" class="form-control">
                     <option th:each="stage :${stageOfTheCompanies}"
                             th:text="${stage}">
-                </select></td>
-            <td>
-                <select name="_marketValidation">
+                </select>
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label >Market Validation</label>
+                <select name="_marketValidation" type="text" class="form-control" >
                     <option th:each="market :${marketValidations}"
                             th:text="${market}">
                 </select>
-            </td>
+            </div>
 
-            <td>
-                <select name="_sizeOfTheSales">
+            <div class="col-md-2 mb-3">
+                <label >Size Of The Sales</label>
+                <select type="text" class="form-control" name="_sizeOfTheSales" >
                     <option th:each="size :${sizeOfTheSales1}"
                             th:value="${size}"
                             th:text="${size.getSale()}">
-                </select></td>
+                </select>
+            </div>
 
+            <div class="col-md-2 mb-3">
+                <label >Investment Process</label>
+                <select type="text" class="form-control"  name="_investmentProcess">
+                    <option th:each="investment :${investmentProcesses}"
+                            th:text="${investment}">
+                </select>
+            </div>
 
-            <td>
-            <select name="_investmentProcess">
-                <option th:each="investment :${investmentProcesses}"
-                        th:text="${investment}">
-            </select>
-            </td>
+            <div class="col-md-2 mb-3">
+                <label >Priority Company</label>
+                <select name="_priorityCompany" type="text" class="form-control" >
+                    <option th:each="priority :${priorityCompanies}"
+                            th:text="${priority}">
+                </select>
+            </div>
 
-            <td>
-            <select name="_priorityCompany">
-                <option th:each="priority :${priorityCompanies}"
-                        th:text="${priority}">
-            </select>
-             </td>
+            <div class="col-md-2 mb-3">
+                <label>Status Company</label>
+                <select name="_statusCompany" type="text" class="form-control">
+                    <option th:each="status :${statusCompanies}"
+                            th:text="${status}">
+                </select>
+            </div>
 
-            <td>
-            <select name="_statusCompany">
-                <option th:each="status :${statusCompanies}"
-                        th:text="${status}">
-            </select>
-            </td>
+            <div class="col-md-2 mb-3">
+                <label >Transfer Company</label>
+                <select name="_transferCompany" type="text" class="form-control">
+                    <option th:each="transfer :${transferCompanies}"
+                            th:text="${transfer}">
+                </select>
+            </div>
 
-            <td>
-            <select name="_transferCompany">
-                <option th:each="transfer :${transferCompanies}"
-                        th:text="${transfer}">
-            </select>
-           </td>
+            <div class="col-md-2 mb-3">
+                <label>Website</label>
+<!--                <input type="text" class="form-control"  placeholder="Founder name" required>-->
+                <input type="text" class="form-control" name="website" placeholder="Website" />
+            </div>
 
-            <td> <input type="text" name="website" placeholder="Website"/>   </td>
-            <td><input type="text" name="video" placeholder="Video"/>   </td>
+            <div class="col-md-2 mb-3">
+                <label>Video</label>
+<!--                <input type="text" class="form-control"  placeholder="Founder name" required>-->
+                <input type="text" class="form-control" name="video" placeholder="Video"/>
+            </div>
+        </div>
+        <br> <br>
 
-            <td>
-                <input type="file" name="file" id="customFile">
-<!--            <label class="custom-file-label" for="customFile">Choose file</label>-->
-            </td>
+    <form class="needs-validation" novalidate>
+        <div class="form-row">
+            <div class="col-md-2 mb-3">
+                <label >Founder name</label>
+                <input type="text" class="form-control" name="founder_name" placeholder="Founder name" >
+            </div>
 
-            <td>
-                <input type="file" name="infoFile" id="customFile2">
-<!--                <label class="custom-file-label" for="customFile2">Choose PDF file</label>-->
-            </td>
-        <tr/>
+            <div class="col-md-2 mb-3">
+                <label >Founder family name</label>
+                <input type="text" class="form-control" name="founder_family_name" placeholder="Founder family name"  >
+            </div>
 
-        </tbody>
-    </table>
-    <br> <br>
-    <br> <br>
+            <div class="col-md-2 mb-3">
+                <label >Email</label>
+                <input type="text" class="form-control" name="founder_email" placeholder="Email"  >
+            </div>
 
+            <div class="col-md-2 mb-3">
+                <label >Mobile</label>
+                <input type="text" class="form-control" name="founder_mobile" placeholder="Mobile"  >
+            </div>
 
+            <div class="col-md-2 mb-3">
+                <label >Linkedin</label>
+                <input type="text" class="form-control" name="founder_linkedin" placeholder="Linkedin"  >
+            </div>
 
-    <table>
-        <tbody>
-        <tr>
-            <th>Founder name</th>
-            <th>Founder family name</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>Linkedin</th>
-            <th>Country</th>
-        </tr>
+            <div class="col-md-2 mb-3">
+                <label >Country</label>
+                <input type="text" class="form-control" name="founder_country" placeholder="Country"  >
+            </div>
 
-        <tr>
-            <td> <input type="text" name="founder_name" placeholder="Name of founder"/></td>
-            <td><input type="text" name="founder_family_name" placeholder="Family name"/></td>
-            <td><input type="text" name="founder_email" placeholder="Email"/></td>
-            <td><input type="text" name="founder_mobile" placeholder="Mobile"/></td>
-            <td> <input type="text" name="founder_linkedin" placeholder="Linkedin"/></td>
-            <td> <input type="text" name="founder_country" placeholder="Country"/></td>
+        </div>
 
-        </tbody>
-    </table>
+            <div class="input-group mb-3 col-md-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="file" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" >Choose logo</label>
+                </div>
+            </div>
 
-    <br> <br>
-    <br> <br>
+        <div class="input-group mb-2 col-md-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text" >Upload</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="infoFile" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label">Choose any type file</label>
+            </div>
+        </div>
+<!--    </div>-->
 
-  <input type="submit" value="Save" />
+    <br>
+
+  <input class="btn btn-primary"  type="submit" value="Save" />
 
   </form>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</div>
   </body>
   </html>
+
+<!--    <table>-->
+<!--        <tbody>-->
+<!--        <tr>-->
+<!--            <th>Founder name</th>-->
+<!--            <th>Founder family name</th>-->
+<!--            <th>Email</th>-->
+<!--            <th>Mobile</th>-->
+<!--            <th>Linkedin</th>-->
+<!--            <th>Country</th>-->
+<!--        </tr>-->
+
+<!--        <tr>-->
+<!--            <td> <input type="text" name="founder_name" placeholder="Name of founder"/></td>-->
+<!--            <td><input type="text" name="founder_family_name" placeholder="Family name"/></td>-->
+<!--            <td><input type="text" name="founder_email" placeholder="Email"/></td>-->
+<!--            <td><input type="text" name="founder_mobile" placeholder="Mobile"/></td>-->
+<!--            <td> <input type="text" name="founder_linkedin" placeholder="Linkedin"/></td>-->
+<!--            <td> <input type="text" name="founder_country" placeholder="Country"/></td>-->
+
+<!--        </tbody>-->
+<!--    </table>-->
+
+
+<!--<table>-->
+    <!--        <tbody>-->
+    <!--        <tr>-->
+    <!--            <th>Company name</th>-->
+    <!--            <th>Categories</th>-->
+    <!--            <th>Sub Categories</th>-->
+
+    <!--            <th>Stage Of The Company</th>-->
+    <!--            <th>Market Validation</th>-->
+    <!--            <th>Size Of The Sales</th>-->
+    <!--            <th>Investment Process</th>-->
+    <!--            <th>Priority Company</th>-->
+    <!--            <th>Status Company</th>-->
+    <!--            <th>Transfer Company</th>-->
+
+    <!--            <th>Website</th>-->
+    <!--            <th>Video</th>-->
+
+    <!--        </tr>-->
+
+    <!--        <tr>-->
+    <!--            <td><input type="text" name="company_name" placeholder="Name of company"/>           </td>-->
+    <!--            <td>-->
+    <!--                <select multiple="multiple" class="category" >-->
+    <!--                    <option th:each="category : ${CategoriesList}"-->
+    <!--                            th:text="${category.name}">-->
+
+    <!--                    </option>-->
+    <!--                </select>-->
+    <!--            </td>-->
+    <!--            <td> <select multiple="multiple" name="subCategories_s" class="category">-->
+    <!--                <option th:each="sub : ${subCategoriesList}"-->
+    <!--                        th:value="${sub.name}"-->
+    <!--                        th:text="${sub.name +'  ('+sub.getCategory()+')'}">-->
+    <!--            </select>-->
+    <!--            </td>-->
+    <!--            <td>-->
+
+    <!--                <select name="_stageOfCompany">-->
+    <!--                    <option th:each="stage :${stageOfTheCompanies}"-->
+    <!--                            th:text="${stage}">-->
+    <!--                </select></td>-->
+    <!--            <td>-->
+    <!--                <select name="_marketValidation">-->
+    <!--                    <option th:each="market :${marketValidations}"-->
+    <!--                            th:text="${market}">-->
+    <!--                </select>-->
+    <!--            </td>-->
+
+    <!--            <td>-->
+    <!--                <select name="_sizeOfTheSales">-->
+    <!--                    <option th:each="size :${sizeOfTheSales1}"-->
+    <!--                            th:value="${size}"-->
+    <!--                            th:text="${size.getSale()}">-->
+    <!--                </select></td>-->
+
+
+    <!--            <td>-->
+    <!--            <select name="_investmentProcess">-->
+    <!--                <option th:each="investment :${investmentProcesses}"-->
+    <!--                        th:text="${investment}">-->
+    <!--            </select>-->
+    <!--            </td>-->
+
+    <!--            <td>-->
+    <!--            <select name="_priorityCompany">-->
+    <!--                <option th:each="priority :${priorityCompanies}"-->
+    <!--                        th:text="${priority}">-->
+    <!--            </select>-->
+    <!--             </td>-->
+
+    <!--            <td>-->
+    <!--            <select name="_statusCompany">-->
+    <!--                <option th:each="status :${statusCompanies}"-->
+    <!--                        th:text="${status}">-->
+    <!--            </select>-->
+    <!--            </td>-->
+
+    <!--            <td>-->
+    <!--            <select name="_transferCompany">-->
+    <!--                <option th:each="transfer :${transferCompanies}"-->
+    <!--                        th:text="${transfer}">-->
+    <!--            </select>-->
+    <!--           </td>-->
+
+    <!--            <td> <input type="text" name="website" placeholder="Website"/>   </td>-->
+    <!--            <td><input type="text" name="video" placeholder="Video"/>   </td>-->
+
+    <!--            <td>-->
+    <!--                <input type="file" name="file" id="customFile">-->
+    <!--&lt;!&ndash;            <label class="custom-file-label" for="customFile">Choose file</label>&ndash;&gt;-->
+    <!--            </td>-->
+
+    <!--            <td>-->
+    <!--                <input type="file" name="infoFile" id="customFile2">-->
+    <!--&lt;!&ndash;                <label class="custom-file-label" for="customFile2">Choose PDF file</label>&ndash;&gt;-->
+    <!--            </td>-->
+    <!--        <tr/>-->
+
+    <!--        </tbody>-->
+    <!--    </table>-->
+    <!--    <br> <br>-->
+    <!--    <br> <br>-->
+
+
+
+
+
+
+
+    <!--    <th>Stage Of The Company</th>-->
+    <!--    <th>Market Validation</th>-->
+    <!--    <th>Size Of The Sales</th>-->
+    <!--    <th>Investment Process</th>-->
+    <!--    <th>Priority Company</th>-->
+    <!--    <th>Status Company</th>-->
+    <!--    <th>Transfer Company</th>-->
+
+<!--    <table>-->
+<!--        <tbody>-->
+<!--        <tr>-->
+<!--            <th>Company name</th>-->
+<!--            <th>Categories</th>-->
+<!--            <th>Sub Categories</th>-->
+
+<!--            <th>Stage Of The Company</th>-->
+<!--            <th>Market Validation</th>-->
+<!--            <th>Size Of The Sales</th>-->
+<!--            <th>Investment Process</th>-->
+<!--            <th>Priority Company</th>-->
+<!--            <th>Status Company</th>-->
+<!--            <th>Transfer Company</th>-->
+
+<!--            <th>Website</th>-->
+<!--            <th>Video</th>-->
+
+<!--        </tr>-->
+
+<!--        <tr>-->
+<!--            <td><input type="text" name="company_name" placeholder="Name of company"/>           </td>-->
+<!--            <td>-->
+<!--                <select multiple="multiple" class="category" >-->
+<!--                    <option th:each="category : ${CategoriesList}"-->
+<!--                            th:text="${category.name}">-->
+
+<!--                    </option>-->
+<!--                </select>-->
+<!--            </td>-->
+<!--            <td> <select multiple="multiple" name="subCategories_s" class="category">-->
+<!--                <option th:each="sub : ${subCategoriesList}"-->
+<!--                        th:value="${sub.name}"-->
+<!--                        th:text="${sub.name +'  ('+sub.getCategory()+')'}">-->
+<!--            </select>-->
+<!--            </td>-->
+<!--            <td>-->
+
+<!--                <select name="_stageOfCompany">-->
+<!--                    <option th:each="stage :${stageOfTheCompanies}"-->
+<!--                            th:text="${stage}">-->
+<!--                </select>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <select name="_marketValidation">-->
+<!--                    <option th:each="market :${marketValidations}"-->
+<!--                            th:text="${market}">-->
+<!--                </select>-->
+<!--            </td>-->
+
+<!--            <td>-->
+<!--                <select name="_sizeOfTheSales">-->
+<!--                    <option th:each="size :${sizeOfTheSales1}"-->
+<!--                            th:value="${size}"-->
+<!--                            th:text="${size.getSale()}">-->
+<!--                </select></td>-->
+
+
+<!--            <td>-->
+<!--            <select name="_investmentProcess">-->
+<!--                <option th:each="investment :${investmentProcesses}"-->
+<!--                        th:text="${investment}">-->
+<!--            </select>-->
+<!--            </td>-->
+
+<!--            <td>-->
+<!--            <select name="_priorityCompany">-->
+<!--                <option th:each="priority :${priorityCompanies}"-->
+<!--                        th:text="${priority}">-->
+<!--            </select>-->
+<!--             </td>-->
+
+<!--            <td>-->
+<!--            <select name="_statusCompany">-->
+<!--                <option th:each="status :${statusCompanies}"-->
+<!--                        th:text="${status}">-->
+<!--            </select>-->
+<!--            </td>-->
+
+<!--            <td>-->
+<!--            <select name="_transferCompany">-->
+<!--                <option th:each="transfer :${transferCompanies}"-->
+<!--                        th:text="${transfer}">-->
+<!--            </select>-->
+<!--           </td>-->
+
+<!--            <td> <input type="text" name="website" placeholder="Website"/>   </td>-->
+<!--            <td><input type="text" name="video" placeholder="Video"/>   </td>-->
+
+<!--            <td>-->
+<!--                <input type="file" name="file" id="customFile">-->
+<!--&lt;!&ndash;            <label class="custom-file-label" for="customFile">Choose file</label>&ndash;&gt;-->
+<!--            </td>-->
+
+<!--            <td>-->
+<!--                <input type="file" name="infoFile" id="customFile2">-->
+<!--&lt;!&ndash;                <label class="custom-file-label" for="customFile2">Choose PDF file</label>&ndash;&gt;-->
+<!--            </td>-->
+<!--        <tr/>-->
+
+<!--        </tbody>-->
+<!--    </table>-->

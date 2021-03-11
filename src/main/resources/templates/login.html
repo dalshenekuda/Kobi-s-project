@@ -2,13 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example </title>
+    <title>Sing in </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-<div class="container mt-4">
+
 <div th:replace="navbar"></div>
+<div class="container-fluid">
 <br> <br>
 
 <div th:if="${param.error}">
@@ -20,11 +21,11 @@
 <form th:action="@{/login}" method="post">
 
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label"> User Name : </label>
-        <div class="col-sm-3">
-          <input class="form-control" type="text" name="username"/>
-        </div>
+    <label class="col-sm-2 col-form-label"> User Name : </label>
+    <div class="col-sm-3">
+        <input class="form-control" type="text" name="username"/>
     </div>
+</div>
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label"> Password: </label>
