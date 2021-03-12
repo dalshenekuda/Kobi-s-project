@@ -6,75 +6,237 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <title>Company details</title>
+    <style>
+        hr {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
 <div th:replace="navbar"></div>
 <div class="container-fluid">
-    <br>
-    <h2 ><span th:text="${company.getCompany_name()}"> </span></h2>
+
+
     <form th:action="@{/company}"  method="GET">
+        <br>
+        <form class="needs-validation" novalidate>
+            <div class="form-row">
 
+                <div class="col-md-2 mb-3">
+<!--                    <div class="card" >-->
 
-        <table class="table-striped ">
-            <thead class="thead">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="col-sm">
+                                    <h2 ><span th:text="${company.getCompany_name()}"> </span></h2>
+                                    <img th:src="@{/img/{filename}(filename = ${company.filename})}" class="img-thumbnail" width="130" height="130" >
+                                </div>
+                            </li>
+                        </ul>
+<!--                    </div>-->
+                </div>
 
-
-            </thead>
-
-            <tr>
-
-                <td> <div class="card" style="width: 18rem;">
-                    <div class="card-header">
-                        Stage Of The Company
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            Categories
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getCategories()}"> </span></li>
+                        </ul>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><span th:text="${company.getStageOfTheCompany()}"> </span></li>
-                    </ul>
                 </div>
-                <td>
 
-                <td> <div class="card" style="width: 18rem;">
-                <div class="card-header">
-                    Market Validation
+                <div class="col-md-2 mb-3" style="">
+                    <div class="card" >
+                        <div class="card-header">
+                           Sub categories
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getSubCategories()}"> </span></li>
+                        </ul>
+                    </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><span th:text="${company.getMarketValidation()}"> </span></li>
-                </ul>
+
             </div>
-                <td>
+        </form>
 
-                <td> <div class="card" style="width: 18rem;">
-                    <div class="card-header">
-                        Size Of The Sales
+<hr/>
+
+
+<!--   /////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <form class="needs-validation" novalidate>
+            <div class="form-row">
+
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            Stage Of The Company
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getStageOfTheCompany()}"> </span></li>
+                        </ul>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">An item</li>
-                    </ul>
                 </div>
-                <td>
 
-                <td> <div class="card" style="width: 18rem;">
-                    <div class="card-header">
-                        Featured
+                <div class="col-md-2 mb-3">
+                         <div class="card" >
+                            <div class="card-header">
+                            Market Validation
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getMarketValidation()}"> </span></li>
+                        </ul>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">An item</li>
-                    </ul>
                 </div>
-                <td>
 
-            <tr/>
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            Size Of The Sales
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getSizeOfTheSales().getSale()}"> </span></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-md-2 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Investment Process
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getInvestmentProcess()}"> </span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            Priority Company
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getPriorityCompany()}"> </span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            Status Company
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getStatusCompany()}"> </span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            Transfer Company
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getTransferCompany()}"> </span></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+
+<!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <hr/>
+
+        <form class="needs-validation" novalidate>
+            <div class="form-row">
+
+                <div class="col-md-2 mb-3">
+                        <div class="card" >
+                            <div class="card-header">
+                                Founder name
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><span th:text="${company.getFounder().getName()}"> </span></li>
+                            </ul>
+                         </div>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Founder family name
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getFounder().getFamilyName()}"> </span></li>
+                        </ul>
+                    </div>
+                </div>
 
 
 
 
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            Mobile
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getFounder().getMobile()}"> </span></li>
+                        </ul>
+                    </div>
+                </div>
 
 
-    </form>
+                 <div class="col-md-2 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                Country
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><span th:text="${company.getFounder().getCountry()}"> </span></li>
+                            </ul>
+                        </div>
+                 </div>
+
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            Linkedin
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <!--                        <li class="list-group-item"><span th:text="${company.getFounder().getLinkedin()}"> </span> </span></li>-->
+                            <li class="list-group-item"> <a th:href="@{{link}(link=${company.getFounder().getLinkedin()})}"><span th:text="${company.getFounder().getLinkedin()}"> </span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            Email
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getFounder().getEmail()}"> </span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+         </form>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-</div>
+    </div>
 </body>
 </html>
