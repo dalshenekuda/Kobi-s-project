@@ -11,11 +11,12 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    private boolean active;
+    private boolean active;//
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
+//
     private Set<Role> roles;
 
 //    public User(){}
@@ -27,7 +28,11 @@ public class User {
 //
 //    }
 
-    public Long getId() {
+
+     public boolean isAdmin() {
+        return roles.contains("ADMIN");
+    }
+    Long getId() {
         return id;
     }
 
@@ -66,4 +71,12 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+//       public Role getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
 }

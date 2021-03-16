@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta charset="UTF-8">
     <title>View companies</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -18,7 +19,14 @@
 <body>
 <div th:replace="navbar"></div>
 <div class="container-fluid">
+    <div class="d-flex flex-row-reverse bd-highlight">
+        <div class="p-2 bd-highlight">
+            <form  th:action="@{/logout}" method="post">
+                <input class="btn btn-primary me-2"  type="submit" value="Sign Out"/>
+            </form>
+        </div>
 
+    </div>
 
     <form th:action="@{/company}"  method="GET">
         <br>
@@ -30,13 +38,22 @@
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <div class="col-sm">
+<!--                                <a class="col-sm">-->
                                     <h2 ><span th:text="${company.getCompany_name()}"> </span></h2>
                                     <img th:src="@{/img/{filename}(filename = ${company.filename})}" class="img-thumbnail" width="130" height="130" >
-                                </div>
+
+<!--                                    <a th:href="@{/file/{f}(f=${company.infoFilename})}"  width="700" height="500"/>File</a>-->
+
+                                    <object> <embed th:src="@{/file/{f}(f=${company.infoFilename})}" type="application/pdf" width="700" height="500"/> </object>
+
+<!--                                    <object> <embed th:src="/Java/Kobi-s-project/uploads/6abb0820-6791-4509-b7f5-e8d5be918fdf.Антиплагиат_ИКБО-03-16_Поляк.pdf"  width="700" height="500"/> </object>-->
+
+                                    <!--                                <span>Company's info file</span>-->
+
+
                             </li>
                         </ul>
-<!--                    </div>-->
+
                 </div>
 
                 <div class="col-md-2 mb-3">
@@ -230,6 +247,30 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            WebSite
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getWebsite()}"> </span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <div class="card" >
+                        <div class="card-header">
+                            Video
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span th:text="${company.getVideo()}"> </span></li>
+                        </ul>
+                    </div>
+                </div>
+
+
             </div>
          </form>
 

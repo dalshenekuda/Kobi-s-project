@@ -8,12 +8,18 @@
 <body>
 <div th:replace="navbar"></div>
 <div class="container-fluid">
-<br>
+
+    <div class="d-flex flex-row-reverse bd-highlight">
+        <div class="p-2 bd-highlight">
+            <form  th:action="@{/logout}" method="post">
+             <input class="btn btn-primary me-2"  type="submit" value="Sign Out"/>
+            </form>
+        </div>
+
+    </div>
 
 <div>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+
 </div>
 
 <style>
@@ -178,7 +184,7 @@
             </div>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" name="infoFile" aria-describedby="inputGroupFileAddon01">
-                <label class="custom-file-label">Choose any type file</label>
+                <label class="custom-file-label">Choose PDF file</label>
             </div>
         </div>
 <!--    </div>-->

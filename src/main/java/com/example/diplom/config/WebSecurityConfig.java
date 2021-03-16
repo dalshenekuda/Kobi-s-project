@@ -22,9 +22,13 @@ import javax.sql.DataSource;
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .authorizeRequests()
-                    .antMatchers("/**","/view","/registration","/test","/img/**","/file/**").permitAll()
+            http.authorizeRequests()
+
+                    .antMatchers("/login","/img/**").permitAll()
+                    .antMatchers("/view","/greeting","/company/**").hasRole("USER")
+                    .antMatchers("/company","/Main","/addCategory","/sub","/file/**").hasRole("ADMIN")
+                    .antMatchers("/registration").hasRole("KOBI")
+
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
@@ -32,7 +36,9 @@ import javax.sql.DataSource;
                     .permitAll()
                     .and()
                     .logout()
-                    .permitAll();
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login");
+
         }
 
         @Override

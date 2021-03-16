@@ -9,7 +9,15 @@
 <body>
 <div th:replace="navbar"></div>
 <div class="container-fluid">
-<br> <br>
+    <div class="d-flex flex-row-reverse bd-highlight">
+        <div class="p-2 bd-highlight">
+            <form  th:action="@{/logout}" method="post">
+                <input class="btn btn-primary me-2"  type="submit" value="Sign Out"/>
+            </form>
+        </div>
+
+    </div>
+
 
 <h2>Adding sub category</h2>
 <th> </th>

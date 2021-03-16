@@ -8,8 +8,17 @@
 <body>
 <div th:replace="navbar"></div>
 <div class="container-fluid">
-<br>
-<h2>View companies</h2>
+    <div class="d-flex flex-row-reverse bd-highlight">
+        <div class="p-2 bd-highlight">
+            <form  th:action="@{/logout}" method="post">
+                <input class="btn btn-primary me-2"  type="submit" value="Sign Out"/>
+            </form>
+        </div>
+
+    </div>
+
+
+    <h2>View companies</h2>
 
 <style>
     /*ul.el > li {*/
@@ -29,6 +38,8 @@
 <br>
 
 <form th:action="@{/view}"  method="POST">
+
+
 
             <div class="form-row" >
                 <div class="col-md-1,8 mb-4">
@@ -112,8 +123,10 @@
             </div>
 
     <br>
-     <input type="text" class="form-control mb-2 col-md-3 "  name="fileName" placeholder="Enter the filename, if you want save XLS file"/>
-    <input class="btn btn-primary" type="submit" value="Filter" />
+     <input type="text" class="form-control mb-2 col-md-3 "  name="fileName" placeholder="XLS filename"/>
+    <input class="btn btn-primary" type="submit" name = "action" value="Filter" />
+    <input class="btn btn-primary" type="submit" name = "action" value="Filter and save in XLS file" />
+
     <br>
     <br>
 
@@ -145,7 +158,8 @@
 
         <tr th:each="company : ${companies}">
 
-            <td> <a th:href="@{/company(id=${company.getId()})}"><span th:text="${company.getCompany_name()}"></span></a><td>
+            <td> <a th:href="@{/company(id=${company.getId()})}"><span th:text="${company.getCompany_name()}"></span></a></td>
+
             <td><span th:text="${company.getCategories()}"> </span></td>
             <td><span th:text="${company.getSubCategories()}"> </span></td>
 <!--            <td><span th:text="${company.getWebsite()}"> </span></td>-->

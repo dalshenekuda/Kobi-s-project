@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Sing in </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+<!--<div sec:authorize="isAuthenticated()">-->
+<!--<div th:replace="navbar"></div>-->
+<!--</div>-->
 
-<div th:replace="navbar"></div>
 <div class="container-fluid">
 <br> <br>
 
@@ -33,8 +36,7 @@
             <input class="form-control" type="password" name="password"/>
         </div>
     </div>
-     <div><a href="/registration">Add new user</a>
-         <input class="btn btn-primary" type="submit" value="Sign In"/></div>
+    <input class="btn btn-primary" type="submit" value="Sign In"/>
 </form>
 
 

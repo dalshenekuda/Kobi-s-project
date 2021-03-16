@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Adding category</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -9,7 +11,14 @@
 
 <div th:replace="navbar"></div>
 <div class="container-fluid">
-<br> <br>
+    <div class="d-flex flex-row-reverse bd-highlight">
+        <div class="p-2 bd-highlight">
+            <form  th:action="@{/logout}" method="post">
+                <input class="btn btn-primary me-2"  type="submit" value="Sign Out"/>
+            </form>
+        </div>
+
+    </div>
 
 <h2>Adding category</h2>
 
@@ -17,7 +26,7 @@
 
 <form th:action="@{/addCategory}" th:object="${categories}" method="POST">
 
-    <div class="col-sm-3">
+    <div  sec:authorize="hasRole('ADMIN')" class="col-sm-3">
     <input class="form-control" type="text" name="category_name" placeholder="Name of new category"/>
     </div>
 <br>

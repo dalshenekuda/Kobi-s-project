@@ -1,4 +1,14 @@
-<div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"></div>
+
+
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Gold</a>
@@ -6,42 +16,46 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div sec:authorize="isAuthenticated()" class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            <div sec:authorize="hasRole('ADMIN')">
+                <li class="nav-item active">
+                    <a class="nav-link" href="Main">Adding company <span class="sr-only">(current)</span></a>
+                </li>
+            </div>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="Main">Adding company <span class="sr-only">(current)</span></a>
-            </li>
+            <div sec:authorize="hasRole('ADMIN')">
+                <li  class="nav-item">
+                    <a class="nav-link" href="addCategory">Adding category</a>
 
-            <li class="nav-item">
-                <a class="nav-link" href="addCategory">Adding category</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="sub">Adding sub category</a>
-            </li>
+                </li>
+            </div>
+
+            <div sec:authorize="hasRole('ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" href="sub">Adding sub category</a>
+                </li>
+            </div>
+
             <li class="nav-item">
                 <a class="nav-link" href="view">View</a>
             </li>
+            <div sec:authorize="hasRole('KOBI')">
+                <li class="nav-item">
+                    <a class="nav-link" href="registration">Registration</a>
+                </li>
+            </div>
 
-
-<!--            <li class="nav-item dropdown">-->
-<!--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                    Dropdown-->
-<!--                </a>-->
-<!--                <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--                    <a class="dropdown-item" href="#">Action</a>-->
-<!--                    <a class="dropdown-item" href="#">Another action</a>-->
-<!--                    <div class="dropdown-divider"></div>-->
-<!--                    <a class="dropdown-item" href="#">Something else here</a>-->
-<!--                </div>-->
-<!--            </li>-->
 
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-<!--            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Out</button>-->
-<!--            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Sign Out"/>-->
-<!--            <div class="navbar-text mr-3" th:text="${category.name}"> </div>-->
+
+            </div>
+        <div class="d-flex flex-row-reverse bd-highlight">
+            <div class="p-2 bd-highlight">
+                <div sec:authentication="principal.username"></div>
+            </div>
+
+        </div>
         </form>
     </div>
 </nav>

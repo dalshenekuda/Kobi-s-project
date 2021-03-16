@@ -11,13 +11,19 @@ import com.example.diplom.repos.FounderRepo;
 import com.example.diplom.repos.SubCategoryRepo;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import org.thymeleaf.expression.Lists;
 
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -122,7 +128,7 @@ public class FilterController {
                          @RequestParam (required = false) List<String> subCategories_s, @RequestParam String _stage,
                          @RequestParam String _market, @RequestParam String _status,
                          @RequestParam String _priory, @RequestParam String _transfer,
-                         @RequestParam String _investment, @RequestParam String fileName, Model model) {
+                         @RequestParam String _investment, @RequestParam String fileName,@RequestParam String action, Model model) {
 
 
         Iterable<Company> companies = CompanyRepo.findAll();
@@ -287,6 +293,7 @@ public class FilterController {
         }
             //companiesTmp.forEach(res::add);
         Set<Company> resS= new HashSet<>(res);
+        if(action.equals("Filter and save in XLS file")&&fileName!=null)
         SaveFiles.saveFileXL(res,fileName);
         model.addAttribute("companies",resS);
 
@@ -302,24 +309,64 @@ public class FilterController {
 //         String url = ${upload.path} + imageUrl;
       //  System.out.println("${upload.path}");
         InputStream in = new FileInputStream(url);
-        return IOUtils.toByteArray(in);
-    }
-    @GetMapping(value = "/file/{fileUrl}")
-    public @ResponseBody
-    byte[] file(@PathVariable String fileUrl) throws IOException {
-        String url = "C:/Java/Kobi-s-project/uploads/" + fileUrl; //здесь указываете СВОЙ путь к папке с картинками
-//         String url = ${upload.path} + imageUrl;
-        //  System.out.println("${upload.path}");
-        InputStream in = new FileInputStream(url);
+        System.out.println(in);
         return IOUtils.toByteArray(in);
     }
 
-//    @RequestMapping(value="/file/{fileUrl}", method=RequestMethod.GET)
-//    @ResponseBody
-//    public File downloadFile(@Param(value="id") Long id) {
-//        Product product = productRepo.findOne(id);
-//        return new File(new File(product.getFileUrl()));
+//    @RequestMapping(value = "downloadFile", method = RequestMethod.GET)
+//    public StreamingResponseBody getSteamingFile(HttpServletResponse response) throws IOException {
+//        response.setContentType("application/pdf");
+//        response.setHeader("Content-Disposition", "attachment; filename=\"demo.pdf\"");
+//        InputStream inputStream = new FileInputStream(new File("C:\\demo-file.pdf"));
+//        return outputStream -> {
+//            int nRead;
+//            byte[] data = new byte[1024];
+//            while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+//                System.out.println("Writing some bytes..");
+//                outputStream.write(data, 0, nRead);
+//            }
+//        };
 //    }
+
+//    @GetMapping(value = "/file/{fileUrl}")
+//    public @ResponseBody
+//    byte[] file(@PathVariable String fileUrl) throws IOException {
+//        String url = "C:/Java/Kobi-s-project/uploads/" + fileUrl; //здесь указываете СВОЙ путь к папке с картинками
+////         String url = ${upload.path} + imageUrl;
+//        //  System.out.println("${upload.path}");
+//        InputStream in = new FileInputStream(url);
+//        System.out.println(in);
+//        return IOUtils.toByteArray(in);
+//    }
+
+
+
+
+
+    @GetMapping(value = "/file/{fileUrl}")
+    @ResponseBody
+    public File  file(@PathVariable String fileUrl) throws IOException {
+        String url = "C:/Java/Kobi-s-project/uploads/" + fileUrl; //здесь указываете СВОЙ путь к папке с картинками
+//         String url = ${upload.path} + imageUrl;
+        //  System.out.println("${upload.path}");
+       // InputStream in = new FileInputStream(url);
+        System.out.println(url);
+        return new File(url);
+    }
+
+
+//    @GetMapping(value="/file/{fileUrl}")
+//    @ResponseBody
+//    public FileSystemResource downloadFile(@Param(value="id") Integer id) {
+//        Company company = CompanyRepo.findById(id);
+//        FileSystemResource f.
+////        ApplicationContext context = new AnnotationConfigApplicationContext();
+////        Resource resource = context.getResource("C:/Java/Kobi-s-project/uploads/c30ab7a4-f1c1-4bc4-a187-1d5243595575.rg.xls");
+////       return new FileSystemResource(new File(company.getInfoFilename()));
+////        return new FileSystemResource(new File("C:/Java/Kobi-s-project/uploads/c30ab7a4-f1c1-4bc4-a187-1d5243595575.rg.xls"));
+//        return ;
+//    }
+
 
 //"${upload.path}"
 
