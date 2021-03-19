@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!DOCTYPE "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-5.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+
 <head>
     <meta charset="UTF-8">
     <title>View companies</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <title>Company details</title>
     <style>
@@ -37,21 +43,24 @@
 <!--                    <div class="card" >-->
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
+                            <div class="list-group-item">
 <!--                                <a class="col-sm">-->
                                     <h2 ><span th:text="${company.getCompany_name()}"> </span></h2>
                                     <img th:src="@{/img/{filename}(filename = ${company.filename})}" class="img-thumbnail" width="130" height="130" >
 
-<!--                                    <a th:href="@{/file/{f}(f=${company.infoFilename})}"  width="700" height="500"/>File</a>-->
+                                    <a th:href="@{/file/{fhu}(fhu=${company.infoFilename})}"  th:attrprepend="download=${'Nya.pdf'}">Download PDF file</a>
 
-                                    <object> <embed th:src="@{/file/{f}(f=${company.infoFilename})}" type="application/pdf" width="700" height="500"/> </object>
+<!--                                <a href="C:/Java/Kobi-s-project//uploads/5a00cc22-5ba4-4d34-b329-c1b14c09db70.Антиплагиат_ИКБО-03-16_Поляк.pdf" download="pdf"/>feses</a>-->
+
+<!--                                    <object> <embed th:src="@{/file/{f}(f=${company.infoFilename})}" type="application/pdf" width="700" height="500"/> </object>-->
 
 <!--                                    <object> <embed th:src="/Java/Kobi-s-project/uploads/6abb0820-6791-4509-b7f5-e8d5be918fdf.Антиплагиат_ИКБО-03-16_Поляк.pdf"  width="700" height="500"/> </object>-->
 
                                     <!--                                <span>Company's info file</span>-->
 
 
-                            </li>
+<!--                            </li>-->
+                            </div>
                         </ul>
 
                 </div>
@@ -273,6 +282,26 @@
 
             </div>
          </form>
+
+<!--        <div type="text"  name="idCom" th:name="${company.id}">-->
+
+<!--        </div>-->
+
+        <form  th:action="@{/company/delete}" method="POST">
+            <div sec:authorize="hasRole('ADMIN')">
+                <div class="col-md-2 mb-3">
+
+                    <a>Type this number for delete company : <span th:text="${company.getId()}"> </span></a>
+                    <input type="text" name="idd"  class="form-control" required>
+                </div>
+
+                    <input type="text" name="iddC"  class="d-none" th:value="${company.getId()}" required>
+                  <div class="p-2 bd-highlight">
+                    <input class="btn btn-primary me-2"  type="submit"  value="Delete company"/>
+                  </div>
+
+            </div>
+        </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

@@ -24,9 +24,9 @@ import javax.sql.DataSource;
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
 
-                    .antMatchers("/login","/img/**").permitAll()
+                    .antMatchers("/login","/img/**","/file/**").permitAll()
                     .antMatchers("/view","/greeting","/company/**").hasRole("USER")
-                    .antMatchers("/company","/Main","/addCategory","/sub","/file/**").hasRole("ADMIN")
+                    .antMatchers("/company","/Main","/addCategory","/sub").hasRole("ADMIN")
                     .antMatchers("/registration").hasRole("KOBI")
 
                     .anyRequest().authenticated()

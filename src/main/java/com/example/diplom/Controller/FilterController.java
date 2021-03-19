@@ -11,6 +11,7 @@ import com.example.diplom.repos.FounderRepo;
 import com.example.diplom.repos.SubCategoryRepo;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.FileSystemResource;
@@ -41,6 +42,9 @@ public class FilterController {
     @Autowired
     private SubCategoryRepo SubCategoryRepo;
 
+    @Value("${upload.path}")
+    String uploadPath;
+
     @GetMapping("/company")
     public String view1(String id,Model model) {
 
@@ -48,6 +52,20 @@ public class FilterController {
         Company company = CompanyRepo.findById(idd);
         model.addAttribute("company",company);
         return"company";
+    }
+
+    @PostMapping("/company/delete")
+    public String view2(@RequestParam String idd,@RequestParam String iddC,Model model) {
+
+        if(idd.equals(iddC)) {
+            int id = Integer.parseInt(idd);
+
+            Company company = CompanyRepo.findById(id);
+            if (company != null) {
+                CompanyRepo.delete(company);
+            }
+        }
+        return "redirect:/view";
     }
 
     @GetMapping("/view")
@@ -126,7 +144,7 @@ public class FilterController {
     @PostMapping("/view")
     public String filter(@RequestParam(required = false) List<String> _founders,@RequestParam (required = false) List<String> _categories,
                          @RequestParam (required = false) List<String> subCategories_s, @RequestParam String _stage,
-                         @RequestParam String _market, @RequestParam String _status,
+                         @RequestParam String _market,@RequestParam String cName, @RequestParam String _status,
                          @RequestParam String _priory, @RequestParam String _transfer,
                          @RequestParam String _investment, @RequestParam String fileName,@RequestParam String action, Model model) {
 
@@ -224,6 +242,9 @@ public class FilterController {
         if (!_investment.equalsIgnoreCase("NONE"))
             investment = InvestmentProcess.valueOf(_investment);
 
+
+
+
         companies = CompanyRepo.findByStageOfTheCompanyAndMarketValidationAndStatusCompanyAndPriorityCompanyAndTransferCompanyAndInvestmentProcess(
                 stage, market, status, priory, transfer, investment);
 
@@ -231,10 +252,27 @@ public class FilterController {
         List<Company> companiesAfterEnumsFilter = new ArrayList<>();
         List<Company> companiesTmp = new ArrayList<>();
 
+        List<Company> companies1 = new ArrayList<>();
+
+        if(cName!=null) {
+//            companies.forEach(companies1::add);
+            for (Company c : companies) {
+//                Company company =CompanyRepo.findByCompany_name(cName);
+                if (c.getCompany_name().equalsIgnoreCase(cName)) {
+                    companies1.add(c);
+                }
+            }
+        }
+        if(companies1.isEmpty())
+            companies.forEach(companies1::add);
+
+
+
+//
         if ((_founders != null)) {
             Founder founder = null;
 
-            companies.forEach(companiesTmp::add);
+            companies1.forEach(companiesTmp::add);
             String s1;
             String s2;
 
@@ -250,8 +288,10 @@ public class FilterController {
                 }
             }
         }
+
+
         if(companiesAfterEnumsFilter.isEmpty())
-            companies.forEach(companiesAfterEnumsFilter::add);
+            companies1.forEach(companiesAfterEnumsFilter::add);
 
         //  companiesAfterEnumsFilter
 
@@ -305,9 +345,8 @@ public class FilterController {
     @GetMapping(value = "/img/{imageUrl}")
     public @ResponseBody
     byte[] image(@PathVariable String imageUrl) throws IOException {
-        String url = "C:/Java/Kobi-s-project/uploads/" + imageUrl; //здесь указываете СВОЙ путь к папке с картинками
-//         String url = ${upload.path} + imageUrl;
-      //  System.out.println("${upload.path}");
+
+         String url = uploadPath +"/" + imageUrl;
         InputStream in = new FileInputStream(url);
         System.out.println(in);
         return IOUtils.toByteArray(in);
@@ -328,31 +367,35 @@ public class FilterController {
 //        };
 //    }
 
-//    @GetMapping(value = "/file/{fileUrl}")
-//    public @ResponseBody
-//    byte[] file(@PathVariable String fileUrl) throws IOException {
-//        String url = "C:/Java/Kobi-s-project/uploads/" + fileUrl; //здесь указываете СВОЙ путь к папке с картинками
-////         String url = ${upload.path} + imageUrl;
-//        //  System.out.println("${upload.path}");
-//        InputStream in = new FileInputStream(url);
-//        System.out.println(in);
-//        return IOUtils.toByteArray(in);
-//    }
-
-
-
-
-
     @GetMapping(value = "/file/{fileUrl}")
-    @ResponseBody
-    public File  file(@PathVariable String fileUrl) throws IOException {
+    public @ResponseBody
+    byte[] file(@PathVariable String fileUrl) throws IOException {
         String url = "C:/Java/Kobi-s-project/uploads/" + fileUrl; //здесь указываете СВОЙ путь к папке с картинками
 //         String url = ${upload.path} + imageUrl;
         //  System.out.println("${upload.path}");
-       // InputStream in = new FileInputStream(url);
-        System.out.println(url);
-        return new File(url);
+        InputStream in = new FileInputStream(url);
+        System.out.println(in);
+        return IOUtils.toByteArray(in);
     }
+    @GetMapping(value = "/file")
+    String fileNo(){
+        return "file";
+    }
+
+
+
+
+
+//    @GetMapping(value = "/file/{fileUrl}")
+//    @ResponseBody
+//    public File  file(@PathVariable String fileUrl) throws IOException {
+//        String url = "C:/Java/Kobi-s-project/uploads/" + fileUrl; //здесь указываете СВОЙ путь к папке с картинками
+////         String url = ${upload.path} + imageUrl;
+//        //  System.out.println("${upload.path}");
+//       // InputStream in = new FileInputStream(url);
+//
+//        return File(url);
+//    }
 
 
 //    @GetMapping(value="/file/{fileUrl}")

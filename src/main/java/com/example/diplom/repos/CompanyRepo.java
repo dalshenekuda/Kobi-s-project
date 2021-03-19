@@ -30,4 +30,6 @@ public interface CompanyRepo extends CrudRepository<Company, Long> {
            @Param("investmentProcess")InvestmentProcess investmentProcess);
 
    Company findById(Integer id);
+//    Company findByCompany_name(String name);
+
 }

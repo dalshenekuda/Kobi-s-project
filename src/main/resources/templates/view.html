@@ -41,7 +41,13 @@
 
 
 
-            <div class="form-row" >
+    <div class="form-row" >
+                <div class="col-md-1,8 mb-4">
+                    <label >Company name</label>
+                    <input type="text" name="cName" class="form-control" placeholder="">
+                </div>
+
+
                 <div class="col-md-1,8 mb-4">
                     <label >Founder</label>
                     <select multiple="multiple" name="_founders" class="form-control">
@@ -172,7 +178,7 @@
             <td><span th:text="${company.getStatusCompany()}"> </span></td>
             <td><span th:text="${company.getTransferCompany()}"> </span></td>
 
-            <td><span th:text="${company.getFounder().name + ' '+ company.getFounder().name}"> </span></td>
+            <td><span th:text="${company.getFounder().name + ' '+ company.getFounder().getFamilyName()}"> </span></td>
 <!--            <td><span th:text="${company.getFounder().familyName}"> </span></td>-->
 <!--            <td><span th:text="${company.getFounder().email}"> </span></td>-->
 <!--            <td><span th:text="${company.getFounder().mobile}"> </span></td>-->
