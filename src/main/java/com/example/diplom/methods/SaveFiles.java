@@ -41,7 +41,7 @@ public class SaveFiles {
                 rowhead.createCell(15).setCellValue("Categories");
                 rowhead.createCell(16).setCellValue("Sub categories");
 
-                rowhead.createCell(17).setCellValue("PDFfile");
+//                rowhead.createCell(17).setCellValue("PDFfile");
 
 
 
@@ -67,7 +67,7 @@ public class SaveFiles {
 
             row.createCell(15).setCellValue(companies.get(i).getCategories().toString());
             row.createCell(16).setCellValue(companies.get(i).getSubCategories().toString());
-            row.createCell(17).setCellValue(companies.get(i).getFilename());
+//            row.createCell(17).setCellValue(companies.get(i).getFilename());
         }
 
             FileOutputStream fileOut = new FileOutputStream(filename);

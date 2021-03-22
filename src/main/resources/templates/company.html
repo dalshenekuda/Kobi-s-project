@@ -48,7 +48,7 @@
                                     <h2 ><span th:text="${company.getCompany_name()}"> </span></h2>
                                     <img th:src="@{/img/{filename}(filename = ${company.filename})}" class="img-thumbnail" width="130" height="130" >
 
-                                    <a th:href="@{/file/{fhu}(fhu=${company.infoFilename})}"  th:attrprepend="download=${'Nya.pdf'}">Download PDF file</a>
+                                    <a th:href="@{/file/{fhu}(fhu=${company.infoFilename})}"  th:attr="download=${'Nya.pdf'}">Download PDF file</a>
 
 <!--                                <a href="C:/Java/Kobi-s-project//uploads/5a00cc22-5ba4-4d34-b329-c1b14c09db70.Антиплагиат_ИКБО-03-16_Поляк.pdf" download="pdf"/>feses</a>-->
 
@@ -263,7 +263,7 @@
                             WebSite
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><span th:text="${company.getWebsite()}"> </span></li>
+                            <li class="list-group-item"><a th:href="@{{link}(link=${company.getWebsite()})}"><span th:text="${company.getWebsite()}"> </span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -274,7 +274,7 @@
                             Video
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><span th:text="${company.getVideo()}"> </span></li>
+                            <li class="list-group-item"><a th:href="@{{link}(link=${company.getVideo()})}"><span th:text="${company.getVideo()}"> </span></a></li>
                         </ul>
                     </div>
                 </div>

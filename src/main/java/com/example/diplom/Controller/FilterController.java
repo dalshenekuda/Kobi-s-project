@@ -9,26 +9,16 @@ import com.example.diplom.repos.CategoryRepo;
 import com.example.diplom.repos.CompanyRepo;
 import com.example.diplom.repos.FounderRepo;
 import com.example.diplom.repos.SubCategoryRepo;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
-import org.thymeleaf.expression.Lists;
 
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 
 @Controller
@@ -375,8 +365,35 @@ public class FilterController {
         //  System.out.println("${upload.path}");
         InputStream in = new FileInputStream(url);
         System.out.println(in);
+
         return IOUtils.toByteArray(in);
     }
+
+//    @GetMapping(value = "/file/{fileUrl}")
+//    public @ResponseBody
+//    File file(@PathVariable String fileUrl) throws IOException {
+//        String url = "C:/Java/Kobi-s-project/uploads/" + fileUrl; //здесь указываете СВОЙ путь к папке с картинками
+////         String url = ${upload.path} + imageUrl;
+//        //  System.out.println("${upload.path}");
+//        InputStream in = new FileInputStream(url);
+//
+//
+//        byte[] arr= IOUtils.toByteArray(in);
+//
+//
+//        File file = new File(url);
+////        FileOutputStream fos = new FileOutputStream(new File(uploadPath,"someFile.txt"));
+////        fos.write(arr);
+////        fos.close();
+////
+////        File foundFile = (File) FileUtils
+////                .listFiles(new File("C:/Java/Kobi-s-project/uploads/"), null, true)
+////                .stream()
+////                .filter(f -> f.getName().equals("someFile.txt"));
+//////
+//
+//        return file;
+//    }
     @GetMapping(value = "/file")
     String fileNo(){
         return "file";
