@@ -8,10 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.jws.soap.SOAPBinding;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class RegistrationController {
@@ -20,18 +17,37 @@ public class RegistrationController {
 
     @GetMapping("/login")
     public String login(Model model) {
+
+        if(userRepo.findAll().isEmpty()){
+            User user= new User();
+            user.setUsername("kobi");
+            user.setPassword("1");
+            Set<Role> roles = new HashSet<>();
+            roles.add(Role.ROLE_USER);
+            roles.add(Role.ROLE_ADMIN);
+            roles.add(Role.ROLE_KOBI);
+
+            user.setRoles(roles);
+            user.setActive(true);
+            userRepo.save(user);
+        }
+
         return "login";
     }
+
     @GetMapping("/logout")
     public String logout(Model model)
     {
-
         return "login";
     }
 
 
     @GetMapping("/registration")
-    public String registration() {
+    public String registration( Model model){
+
+    List<User> users = userRepo.findAll();
+    model.addAttribute("users",users);
+
         return "registration";
     }
 
@@ -71,6 +87,8 @@ public class RegistrationController {
 //        user.setRoles(Role.ROLE_USER);
         userRepo.save(user);
 
+        Iterable<User> users = userRepo.findAll();
+        model.addAttribute("users",users);
 
         return "registration";
     }

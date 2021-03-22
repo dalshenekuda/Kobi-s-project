@@ -39,6 +39,20 @@
     </div>
     <br>
     <input class="btn btn-primary" type="submit" value="Save"/>
+    <table style="margin-left: 17px">
+
+        <th> Users: </th>
+        <th> </th>
+
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td><span th:text="${user.getId()}"></span></td>
+            <td><span th:text="${user.getUsername()}"> </span></td>
+            <td><span th:text="${user.getPassword()}"> </span></td>
+            <td><span th:text="${user.getRoles()}"> </span></td>
+        </tr>
+        </tbody>
+    </table>
 
 </form>
 
