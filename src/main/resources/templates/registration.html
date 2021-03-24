@@ -56,6 +56,22 @@
 
 </form>
 
+    <br>
+    <form th:action="@{/registration/delete}"  method="POST">
+
+        <div class="col-md-2 mb-3">
+
+            <a>Type  number of user for delete this user : </span></a>
+            <input type="text" name="idd"  class="form-control" >
+        </div>
+
+<!--        <input type="text" name="iddC"  class="d-none" th:value="${company.getId()}" required>-->
+<!--        <div class="p-2 bd-highlight">-->
+            <input class="btn btn-primary me-2"  type="submit"  value="Delete user"/>
+<!--        </div>-->
+
+    </form>
+
 
 
 

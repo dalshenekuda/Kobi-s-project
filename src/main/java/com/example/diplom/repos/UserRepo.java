@@ -6,4 +6,5 @@ package com.example.diplom.repos;
 
 public interface UserRepo extends JpaRepository<User, Long> {
     User findByUsername(String username);
+    User findById(long id);
 }

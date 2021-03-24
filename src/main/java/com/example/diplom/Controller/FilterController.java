@@ -1,14 +1,8 @@
 package com.example.diplom.Controller;
-import com.example.diplom.domain.Category;
-import com.example.diplom.domain.Company;
-import com.example.diplom.domain.Founder;
-import com.example.diplom.domain.SubCategory;
+import com.example.diplom.domain.*;
 import com.example.diplom.domain.enums.*;
 import com.example.diplom.methods.SaveFiles;
-import com.example.diplom.repos.CategoryRepo;
-import com.example.diplom.repos.CompanyRepo;
-import com.example.diplom.repos.FounderRepo;
-import com.example.diplom.repos.SubCategoryRepo;
+import com.example.diplom.repos.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +25,8 @@ public class FilterController {
     private CategoryRepo CategoryRepo;
     @Autowired
     private SubCategoryRepo SubCategoryRepo;
+    @Autowired
+    private UserRepo UserRepo;
 
     @Value("${upload.path}")
     String uploadPath;
@@ -45,7 +41,7 @@ public class FilterController {
     }
 
     @PostMapping("/company/delete")
-    public String view2(@RequestParam String idd,@RequestParam String iddC,Model model) {
+    public String companyDelete(@RequestParam String idd,@RequestParam String iddC,Model model) {
 
         if(idd.equals(iddC)) {
             int id = Integer.parseInt(idd);
@@ -57,6 +53,8 @@ public class FilterController {
         }
         return "redirect:/view";
     }
+
+
 
     @GetMapping("/view")
     public String view(Model model) {

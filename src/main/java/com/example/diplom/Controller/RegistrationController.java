@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
@@ -91,5 +92,17 @@ public class RegistrationController {
         model.addAttribute("users",users);
 
         return "registration";
+    }
+
+
+    @PostMapping("/registration/delete")
+    public String userDelete(@RequestParam String idd, Model model) {
+
+            long id = Integer.parseInt(idd);
+            User user = userRepo.findById(id);
+            if (user != null)
+                userRepo.delete(user);
+
+        return "redirect:/registration";
     }
 }
