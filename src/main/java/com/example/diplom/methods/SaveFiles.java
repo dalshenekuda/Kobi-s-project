@@ -4,15 +4,21 @@ import com.example.diplom.domain.Company;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.FileOutputStream;
 import java.util.List;
 
+
 public class SaveFiles {
+
+
     public static void saveFileXL(List<Company> companies,String fileName){
 
         try {
-            String filename = "C:/Users/arsen/OneDrive/Рабочий стол/Стажировка/"+fileName+".xls";
+//            String filename = "C:/Users/arsen/OneDrive/Рабочий стол/Стажировка/"+fileName+".xls";
+            String filename = "/root/uploads/"+fileName+".xls";
+
             @SuppressWarnings("resource")
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet sheet = workbook.createSheet(fileName);

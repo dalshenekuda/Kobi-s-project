@@ -28,11 +28,18 @@
     table {
         /*border-collapse: separate;*/
         border-spacing: 30px 0;
+        height: 50px;
     }
 
     td {
         padding: 10px 0;
     }
+
+    TD DIV {
+        overflow: scroll; /* Добавляем полосы прокрутки */
+        width: 200px; /* Ширина элемента */
+    }
+
 </style>
 
 <br>
@@ -130,11 +137,47 @@
 
     <br>
      <input type="text" class="form-control mb-2 col-md-3 "  name="fileName" placeholder="XLS filename"/>
+
+<!--    <a th:href="@{/file/{fhu}(fhu=${name})}"  th:attr="download=${'Nya.xls'}">Download XLS file</a>-->
+    <div class="col-sm-3">
     <input class="btn btn-primary" type="submit" name = "action" value="Filter" />
     <input class="btn btn-primary" type="submit" name = "action" value="Filter and save in XLS file" />
+    </div>
+
+<!--    <div class="form-group">-->
+<!--            <label >XLS files: </label>-->
+<!--            <select >-->
+<!--                <option th:each="f :${listXLS}">-->
+<!--                <a th:href="@{/file/{fhu}(fhu=${f})}"  th:attr="download=${'Nya.xls'}"> <span th:text="${f}"> </span></a></option>-->
+<!--            </select>-->
+<!--        </div>-->
+</form>
+
+
+<!--    <table style="height:20px">-->
+        <th> XLS files: </th>
+<!--&lt;!&ndash;        <th> </th>&ndash;&gt;-->
+
+    <div class="col-sm">
+        <tbody style="height:20px">
+        <tr style="height:20px" th:each="f : ${listXLS}">
+<!--            <td><span th:text="${category.category_id}"></span></td>-->
+            <td style="height:20px"><a th:href="@{/file/{fhu}(fhu=${f})}"  th:attr="download=${'Nya.xls'}"><span th:text="${f}"> </span></a></td>
+            <td><a>_ | _</a></td>
+        </tr>
+        </tbody>
+    </div>
+    </table>
+
+
+
+
+
 
     <br>
     <br>
+
+
 
     <table class="table-striped ">
         <thead class="thead">

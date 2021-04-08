@@ -48,6 +48,17 @@ public class FilterController {
 
             Company company = CompanyRepo.findById(id);
             if (company != null) {
+
+                File file = new File(uploadPath+"/"+company.getFilename());
+                if(file.delete()){
+                    System.out.println("файл удален");
+                }else System.out.println(uploadPath+"/"+company.getFilename()+"Not found");
+
+                File file1 = new File(uploadPath+"/"+company.getInfoFilename());
+                if(file1.delete()){
+                    System.out.println("файл удален");
+                }else System.out.println(uploadPath+"/"+company.getFilename()+"Not found");
+
                 CompanyRepo.delete(company);
             }
         }
@@ -125,6 +136,16 @@ public class FilterController {
             i.add(e + "");
         }
         model.addAttribute("investmentProcesses", i);
+
+
+        File dir = new File("/root/uploads/"); //path указывает на директорию
+        List<String> listXLS = new ArrayList<>();
+        for ( File file : dir.listFiles() ){
+            if (file.getName().contains(".xls"))
+                listXLS.add(file.getName());
+        }
+        Collections.sort(listXLS);
+        model.addAttribute("listXLS",listXLS);
 
         return "view";
     }
@@ -325,6 +346,15 @@ public class FilterController {
         SaveFiles.saveFileXL(res,fileName);
         model.addAttribute("companies",resS);
 
+        File dir = new File("/root/uploads/"); //path указывает на директорию
+        List<String> listXLS = new ArrayList<>();
+        for ( File file : dir.listFiles() ){
+            if (file.getName().contains(".xls"))
+                listXLS.add(file.getName());
+        }
+        Collections.sort(listXLS);
+
+        model.addAttribute("listXLS",listXLS);
 
         return "view";
     }
@@ -358,14 +388,15 @@ public class FilterController {
     @GetMapping(value = "/file/{fileUrl}")
     public @ResponseBody
     byte[] file(@PathVariable String fileUrl) throws IOException {
-        String url = "C:/Java/Kobi-s-project/uploads/" + fileUrl; //здесь указываете СВОЙ путь к папке с картинками
-//         String url = ${upload.path} + imageUrl;
+//        String url = "C:/Java/Kobi-s-project/uploads/" + fileUrl; //здесь указываете СВОЙ путь к папке с картинками
+         String url = uploadPath + fileUrl;
         //  System.out.println("${upload.path}");
         InputStream in = new FileInputStream(url);
         System.out.println(in);
 
         return IOUtils.toByteArray(in);
     }
+
 
 //    @GetMapping(value = "/file/{fileUrl}")
 //    public @ResponseBody
